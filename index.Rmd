@@ -1,0 +1,30 @@
+---
+title: "SoCal Data Science Bootcamp"
+subtitle: "Summer 2022 Schedule"
+output: 
+  html_document:
+    css: "style.css"
+    toc: true
+    toc_depth: 2
+---
+
+
+## Before the Bootcamp
+
+- Install R 
+
+- Install RStudio
+
+- Fill out GitHub Survey
+
+- 
+
+## Day 1
+
+## Day 2 
+
+## Day 3
+
+## Day 4
+
+## Day 5
