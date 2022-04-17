@@ -6,25 +6,39 @@ output:
     css: "style.css"
     toc: true
     toc_depth: 2
+    toc_float: true
 ---
 
 
 ## Before the Bootcamp
 
-- Install R 
+- **Sign up for GitHub** [`r fontawesome::fa(name = "link")`](https://github.com) Sign up for a free GitHub account if you don't already have one. Make sure to pick a username that you feel comfortable sharing on your CV. You will most likely use your GitHub username for many years in your data science career. Fill out [this survey](https://forms.gle/SnXs9u6coACkdDGEA) to let us know what your username is. 
 
-- Install RStudio
+- **Install R** [`r fontawesome::fa(name = "link")`](https://mirror.las.iastate.edu/CRAN/) Yes, you do need to download and install R even if you have downloaded before. There is a newer version.
 
-- Fill out GitHub Survey
+- **Install RStudio** [`r fontawesome::fa(name = "link")`](https://www.rstudio.com/products/rstudio/download/) Yes, you do need to download and install RStudio even if you have downloaded before. There is a newer version. Download the free Desktop version.
 
-- 
+
+- **Install and setup git** [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=3637094&node=12339053&a=1176648183&autoplay=1) [`r fontawesome::fa(name = "chalkboard-teacher")`](https://www.introdata.science/slides/week00/00a-git-github-install.html#1)
+
+- **Test your installations**  [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=4810457&node=15922642&a=1712193560&autoplay=1)
 
 ## Day 1
 
+TBD
+
 ## Day 2 
+
+TBD
 
 ## Day 3
 
+TBD
+
 ## Day 4
 
+TBD
+
 ## Day 5
+
+TBD
