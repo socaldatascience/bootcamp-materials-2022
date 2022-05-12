@@ -1,0 +1,164 @@
+/*Title slide*/
+
+.title-slide {
+  background-image: url(img/socalds-logo.png);
+  background-position: 10% 60%;
+  background-size: 30%;
+  background-color:  #fefaf3;
+  font-size: 120%;
+  color:  #1B3D6D;
+  font-family: 'Poppins';
+
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+
+.title-slide .title{
+  font-size: 80px;
+}
+
+
+/*end of title slide*/
+
+/*Logo*/
+.remark-slide-content:not(.title-slide){
+  background-image: url(img/socalds-logo.png);
+  background-position: 1% 99%;
+  background-size: 80px;
+}
+/*end of logo*/
+
+
+/*Column layouts*/
+
+.left-panel {
+  width: 43%;
+  float: left;
+}
+.right-panel {
+  width: 55%;
+  float: right;
+  padding-left: 1%;
+}
+
+.pull-left {
+  float: left;
+  width: 48%;
+}
+.pull-right {
+  float: right;
+  width: 48%;
+}
+
+/*end of column layouts*/
+
+/* lists */
+ul {
+  font-size: 30px;
+  list-style-type: square;
+
+
+}
+
+/*end of lists*/
+
+
+
+/*code*/
+
+pre {
+  border:3px solid #F7BF4F;
+  padding: 0.50em;
+  overflow-x: auto;
+}
+
+.remark-code, .remark-inline-code { 
+  font-family: monospace;
+  font-size: 30px;
+}
+
+.remark-inline-code{
+ color:#b47b08;
+}
+
+.hljs-github .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: .5em;
+    background: red;
+}
+
+.remark-code-has-line-highlighted .remark-code-line:not(.remark-code-line-highlighted) {
+  opacity: 0.4;
+}
+
+.remark-code-line-highlighted {
+  background-color: #F7BF4F;
+
+}
+
+/*end of code*/
+
+/* Regular fonts*/
+
+a{
+  color:#1B3D6D;
+}
+
+
+p {
+  font-size: 30px;
+  font-family: 'Helvetica';
+
+}
+h1,h2,h3, h4{
+  color:  #1B3D6D;
+  font-family: 'Helvetica';
+
+
+}
+
+.footnote{
+    position: fixed;
+    bottom: 10px;
+    font-size:12px;
+    left:10%;
+
+}
+
+.font75{font-size:75px}
+.font100{font-size:100px}
+.font150{font-size:150px}
+
+/*end of regular*/
+
+
+/* different types of notes*/
+
+blockquote {
+  background: #dcdcdc;
+  border-left: 5px solid #979797;
+  margin: 1.5em 10px;
+
+}
+
+.important {
+  padding-left: 10px;
+  position: relative;
+  background-color:  #fbf7bf;
+  border-bottom: 1px solid #c5ac80;
+  border-top: 1px solid #c5ac80;
+
+} 
+
+
+/* end of different types of notes*/
+
+
+
+
+table { display: inline-block; }
+
