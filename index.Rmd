@@ -25,6 +25,8 @@ output:
 
 ## Day 1
 
+Icebreaker
+
 Using git
 
 ## Day 2 
