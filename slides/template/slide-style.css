@@ -8,7 +8,6 @@
   font-size: 120%;
   color:  #1B3D6D;
   font-family: 'Poppins';
-  border:10px solid #F7BF4F;
 
 }
 
@@ -26,7 +25,7 @@
 
 /*Logo*/
 .remark-slide-content:not(.title-slide){
-  background-image: url(img/cosmos-uci-dshs.png);
+  background-image: url(img/socalds-logo.png);
   background-position: 1% 99%;
   background-size: 80px;
 }
