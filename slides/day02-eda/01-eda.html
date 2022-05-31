@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Introduction
+## Dr. Mine Dogucu
+]
+---
+class: middle center
+
+.font150[Exploring Data]
+
+
+---
+
+class: middle
+
+```r
+library(tidyverse)
+library(openintro)
+fastfood &lt;- fastfood %&gt;% 
+  mutate(restaurant = as.factor(restaurant))
+```
+
+
+```r
+glimpse(fastfood)
+```
+
+```
+## Rows: 515
+## Columns: 17
+## $ restaurant  &lt;fct&gt; Mcdonalds, Mcdonalds, Mcdonalds, Mcdonalds, Mcdonalds, Mcd…
+## $ item        &lt;chr&gt; "Artisan Grilled Chicken Sandwich", "Single Bacon Smokehou…
+## $ calories    &lt;dbl&gt; 380, 840, 1130, 750, 920, 540, 300, 510, 430, 770, 380, 62…
+## $ cal_fat     &lt;dbl&gt; 60, 410, 600, 280, 410, 250, 100, 210, 190, 400, 170, 300,…
+## $ total_fat   &lt;dbl&gt; 7, 45, 67, 31, 45, 28, 12, 24, 21, 45, 18, 34, 20, 34, 8, …
+## $ sat_fat     &lt;dbl&gt; 2.0, 17.0, 27.0, 10.0, 12.0, 10.0, 5.0, 4.0, 11.0, 21.0, 4…
+## $ trans_fat   &lt;dbl&gt; 0.0, 1.5, 3.0, 0.5, 0.5, 1.0, 0.5, 0.0, 1.0, 2.5, 0.0, 1.5…
+## $ cholesterol &lt;dbl&gt; 95, 130, 220, 155, 120, 80, 40, 65, 85, 175, 40, 95, 125, …
+## $ sodium      &lt;dbl&gt; 1110, 1580, 1920, 1940, 1980, 950, 680, 1040, 1040, 1290, …
+## $ total_carb  &lt;dbl&gt; 44, 62, 63, 62, 81, 46, 33, 49, 35, 42, 38, 48, 48, 67, 31…
+## $ fiber       &lt;dbl&gt; 3, 2, 3, 2, 4, 3, 2, 3, 2, 3, 2, 3, 3, 5, 2, 2, 3, 3, 5, 2…
+## $ sugar       &lt;dbl&gt; 11, 18, 18, 18, 18, 9, 7, 6, 7, 10, 5, 11, 11, 11, 6, 3, 1…
+## $ protein     &lt;dbl&gt; 37, 46, 70, 55, 46, 25, 15, 25, 25, 51, 15, 32, 42, 33, 13…
+## $ vit_a       &lt;dbl&gt; 4, 6, 10, 6, 6, 10, 10, 0, 20, 20, 2, 10, 10, 10, 2, 4, 6,…
+## $ vit_c       &lt;dbl&gt; 20, 20, 20, 25, 20, 2, 2, 4, 4, 6, 0, 10, 20, 15, 2, 6, 15…
+## $ calcium     &lt;dbl&gt; 20, 20, 50, 20, 20, 15, 10, 2, 15, 20, 15, 35, 35, 35, 4, …
+## $ salad       &lt;chr&gt; "Other", "Other", "Other", "Other", "Other", "Other", "Oth…
+```
+
+
+
+---
+class: middle
+
+## Review
+
+**mean** : average of a list of data values 
+`$$\bar x = \frac{\Sigma_{i = 1}^{n} x_i}{n}$$`
+
+**median**: the middle value when the data are ordered
+
+---
+
+**sample variance**: average square distance from the mean. It measures variability of the data.
+`$$s^2 = \frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}$$`
+
+
+**sample standard deviation**: average distance of a data value from the mean. Square root of the variance. 
+
+`$$s = \sqrt{s^{2}} = \sqrt{\frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}}$$`
+
+
+---
+## Mean
+**mean** : average of a list of data values 
+`$$\bar x = \frac{\Sigma_{i = 1}^{n} x_i}{n}$$`
+--
+.pull-left[
+
+```r
+summarize(fastfood, 
+          mean(calories))
+```
+
+```
+## # A tibble: 1 × 1
+##   `mean(calories)`
+##              &lt;dbl&gt;
+## 1             531.
+```
+]
+
+--
+
+.pull-right[
+
+
+```r
+mean(fastfood$calories)
+```
+
+```
+## [1] 530.9126
+```
+
+]
+
+
+---
+## Median
+**median**: the middle value when the data are ordered
+
+--
+.pull-left[
+
+```r
+summarize(fastfood, 
+          median(calories))
+```
+
+```
+## # A tibble: 1 × 1
+##   `median(calories)`
+##                &lt;dbl&gt;
+## 1                490
+```
+]
+
+--
+
+.pull-right[
+
+
+```r
+median(fastfood$calories)
+```
+
+```
+## [1] 490
+```
+
+]
+
+
+
+---
+## Variance
+**sample variance**: average square distance from the mean. It measures variability of the data.
+`$$s^2 = \frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}$$`
+--
+
+.pull-left[
+
+```r
+summarize(fastfood, 
+          var(calories))
+```
+
+```
+## # A tibble: 1 × 1
+##   `var(calories)`
+##             &lt;dbl&gt;
+## 1          79770.
+```
+]
+
+--
+
+.pull-right[
+
+
+```r
+var(fastfood$calories)
+```
+
+```
+## [1] 79770.18
+```
+
+]
+
+
+---
+## Standard Deviation
+**sample standard deviation**: average distance of a data value from the mean. Square root of the variance. 
+`$$s = \sqrt{s^{2}} = \sqrt{\frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}}$$`
+--
+
+.pull-left[
+
+```r
+summarize(fastfood, 
+          sd(calories))
+```
+
+```
+## # A tibble: 1 × 1
+##   `sd(calories)`
+##            &lt;dbl&gt;
+## 1           282.
+```
+]
+
+--
+
+.pull-right[
+
+
+```r
+sd(fastfood$calories)
+```
+
+```
+## [1] 282.4361
+```
+
+]
+
+
+---
+## Minimum
+
+.pull-left[
+
+```r
+summarize(fastfood, 
+          min(calories))
+```
+
+```
+## # A tibble: 1 × 1
+##   `min(calories)`
+##             &lt;dbl&gt;
+## 1              20
+```
+]
+
+--
+
+.pull-right[
+
+
+```r
+min(fastfood$calories)
+```
+
+```
+## [1] 20
+```
+
+]
+
+
+
+---
+## Maximum
+
+.pull-left[
+
+```r
+summarize(fastfood, 
+          max(calories))
+```
+
+```
+## # A tibble: 1 × 1
+##   `max(calories)`
+##             &lt;dbl&gt;
+## 1            2430
+```
+]
+
+--
+
+.pull-right[
+
+
+```r
+max(fastfood$calories)
+```
+
+```
+## [1] 2430
+```
+
+]
+
+
+
+---
+We can use multiple functions inside `summarize`. 
+
+
+```r
+summarize(fastfood, 
+          mean(calories), 
+          median(calories),
+          var(calories),
+          sd(calories),
+          min(calories),
+          max(calories))
+```
+
+```
+## # A tibble: 1 × 6
+##   `mean(calories)` `median(calories)` `var(calories)` `sd(calories)`
+##              &lt;dbl&gt;              &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+## 1             531.                490          79770.           282.
+## # … with 2 more variables: `min(calories)` &lt;dbl&gt;, `max(calories)` &lt;dbl&gt;
+```
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -25,89 +25,199 @@ class: title-slide
 ## `r rmarkdown::metadata$author`
 ]
 ---
-```{r message = FALSE}
-library(tidyverse)
-library(openintro)
-```
-
-
----
-
-
-
 class: middle center
 
-
-.font150[Some new topic]
+.font150[Exploring Data]
 
 
 ---
 
 class: middle
+```{r message = FALSE}
+library(tidyverse)
+library(openintro)
+fastfood <- fastfood %>% 
+  mutate(restaurant = as.factor(restaurant))
+```
 
 ```{r}
-library(magrittr)
-lm(mpg ~ am, data = mtcars) %>% 
-  broom::tidy()
+glimpse(fastfood)
 ```
 
 
+
+---
+class: middle
+
+## Review
+
+**mean** : average of a list of data values 
+$$\bar x = \frac{\Sigma_{i = 1}^{n} x_i}{n}$$
+
+**median**: the middle value when the data are ordered
+
 ---
 
-## Notes
+**sample variance**: average square distance from the mean. It measures variability of the data.
+$$s^2 = \frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}$$
 
->Some brilliant quote by someone  
 
-.important[
+**sample standard deviation**: average distance of a data value from the mean. Square root of the variance. 
 
-We can highlight important text.
+$$s = \sqrt{s^{2}} = \sqrt{\frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}}$$
+
+
+---
+## Mean
+**mean** : average of a list of data values 
+$$\bar x = \frac{\Sigma_{i = 1}^{n} x_i}{n}$$
+--
+.pull-left[
+```{r}
+summarize(fastfood, 
+          mean(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+mean(fastfood$calories)
+```
 
 ]
 
-- Great thing 1
 
-- Great thing 2
+---
+## Median
+**median**: the middle value when the data are ordered
 
-Here is a [link](https://www.cosmos.uci.edu/welcome-to-your-new-website/cluster-1-data-science-in-health-sciences/)
-
-.footnote[
-
-Some footnote
+--
+.pull-left[
+```{r}
+summarize(fastfood, 
+          median(calories))
+```
 ]
 
----
+--
 
-## R code
+.pull-right[
 
-```{r, message=FALSE, eval = FALSE}
-library(beep)
-beepr()
+```{r}
+median(fastfood$calories)
 ```
 
-Also mention it in line `beepr::beep()`
+]
 
 
-Or even highlight it
-
-```{r, message=FALSE, eval = FALSE}
-library(beep)
-beepr() #<<
-```
----
-
-## Math
-
-$$x+7\beta$$
-
-Even more math:
-
-$x+7 +\mu$
 
 ---
+## Variance
+**sample variance**: average square distance from the mean. It measures variability of the data.
+$$s^2 = \frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}$$
+--
 
-## Figure
-
-```{r, echo=FALSE,out.width='40%',fig.align='center'}
-knitr::include_graphics('img/socalds-logo.png')
+.pull-left[
+```{r}
+summarize(fastfood, 
+          var(calories))
 ```
+]
+
+--
+
+.pull-right[
+
+```{r}
+var(fastfood$calories)
+```
+
+]
+
+
+---
+## Standard Deviation
+**sample standard deviation**: average distance of a data value from the mean. Square root of the variance. 
+$$s = \sqrt{s^{2}} = \sqrt{\frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}}$$
+--
+
+.pull-left[
+```{r}
+summarize(fastfood, 
+          sd(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+sd(fastfood$calories)
+```
+
+]
+
+
+---
+## Minimum
+
+.pull-left[
+```{r}
+summarize(fastfood, 
+          min(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+min(fastfood$calories)
+```
+
+]
+
+
+
+---
+## Maximum
+
+.pull-left[
+```{r}
+summarize(fastfood, 
+          max(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+max(fastfood$calories)
+```
+
+]
+
+
+
+---
+We can use multiple functions inside `summarize`. 
+
+```{r}
+summarize(fastfood, 
+          mean(calories), 
+          median(calories),
+          var(calories),
+          sd(calories),
+          min(calories),
+          max(calories))
+```
+
+
 
