@@ -23,13 +23,12 @@ output:
 
 - **Test your installations**  [`r fontawesome::fa(name = "video")`](https://uci.yuja.com/V/Video?v=4810457&node=15922642&a=1712193560&autoplay=1)
 
+
 ## Day 1
 
-Icebreaker
+TBD
 
-Using git
-
-## Day 2 
+## Day 2
 
 TBD
 
@@ -38,9 +37,5 @@ TBD
 TBD
 
 ## Day 4
-
-TBD
-
-## Day 5
 
 TBD
