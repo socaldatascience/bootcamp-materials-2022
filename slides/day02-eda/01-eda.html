@@ -33,9 +33,11 @@ class: middle
 ```r
 library(tidyverse)
 library(openintro)
-fastfood &lt;- fastfood %&gt;% 
-  mutate(restaurant = as.factor(restaurant))
 ```
+
+
+
+
 
 
 ```r
@@ -326,6 +328,29 @@ summarize(fastfood,
 ## # … with 2 more variables: `min(calories)` &lt;dbl&gt;, `max(calories)` &lt;dbl&gt;
 ```
 
+---
+
+
+```r
+fastfood %&gt;% 
+  group_by(restaurant) %&gt;% 
+  summarize(med_calories = median(calories),
+            mean_calories = mean(calories))
+```
+
+```
+## # A tibble: 8 × 3
+##   restaurant  med_calories mean_calories
+##   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Arbys                550          533.
+## 2 Burger King          555          609.
+## 3 Chick Fil-A          390          384.
+## 4 Dairy Queen          485          520.
+## 5 Mcdonalds            540          640.
+## 6 Sonic                570          632.
+## 7 Subway               460          503.
+## 8 Taco Bell            420          444.
+```
 
 
     </textarea>

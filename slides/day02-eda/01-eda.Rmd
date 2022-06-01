@@ -36,9 +36,15 @@ class: middle
 ```{r message = FALSE}
 library(tidyverse)
 library(openintro)
+
+```
+
+```{r echo = FALSE}
 fastfood <- fastfood %>% 
   mutate(restaurant = as.factor(restaurant))
 ```
+
+
 
 ```{r}
 glimpse(fastfood)
@@ -219,5 +225,13 @@ summarize(fastfood,
           max(calories))
 ```
 
+---
+
+```{r}
+fastfood %>% 
+  group_by(restaurant) %>% 
+  summarize(med_calories = median(calories),
+            mean_calories = mean(calories))
+```
 
 
