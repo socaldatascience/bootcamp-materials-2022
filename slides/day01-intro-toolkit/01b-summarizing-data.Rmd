@@ -1,0 +1,502 @@
+---
+title: "Summarizing Data with Numbers"
+author: "Dr. Mine Dogucu and Prof. Alma Castro"
+output: 
+  xaringan::moon_reader:
+    css: ["slide-style.css"]
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+
+
+---
+
+class: title-slide
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+---
+class: middle center
+
+.font150[Exploring Data]
+
+
+---
+
+class: middle
+```{r message = FALSE}
+library(tidyverse)
+library(openintro)
+
+```
+
+```{r echo = FALSE}
+fastfood <- fastfood %>% 
+  mutate(restaurant = as.factor(restaurant))
+```
+
+
+
+```{r}
+glimpse(fastfood)
+```
+
+
+
+---
+class: middle
+
+## Review
+
+**mean** : average of a list of data values 
+$$\bar x = \frac{\Sigma_{i = 1}^{n} x_i}{n}$$
+
+**median**: the middle value when the data are ordered
+
+---
+
+**sample variance**: average square distance from the mean. It measures variability of the data.
+$$s^2 = \frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}$$
+
+
+**sample standard deviation**: average distance of a data value from the mean. Square root of the variance. 
+
+$$s = \sqrt{s^{2}} = \sqrt{\frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}}$$
+
+
+---
+## Mean
+**mean** : average of a list of data values 
+$$\bar x = \frac{\Sigma_{i = 1}^{n} x_i}{n}$$
+--
+
+.pull-left[
+
+```{r}
+summarize(fastfood, 
+          mean(calories))
+```
+
+]
+
+--
+
+.pull-right[
+
+```{r}
+mean(fastfood$calories)
+```
+
+]
+
+
+---
+
+## Median
+
+**median**: the middle value when the data are ordered
+
+--
+.pull-left[
+```{r}
+summarize(fastfood, 
+          median(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+median(fastfood$calories)
+```
+
+]
+
+
+
+---
+
+class: middle
+
+## Variance
+
+**sample variance**: average square distance from the mean. It measures variability of the data.
+$$s^2 = \frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}$$
+--
+
+.pull-left[
+```{r}
+summarize(fastfood, 
+          var(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+var(fastfood$calories)
+```
+
+]
+
+
+---
+
+class: middle
+
+## Standard Deviation
+**sample standard deviation**: average distance of a data value from the mean. Square root of the variance. 
+$$s = \sqrt{s^{2}} = \sqrt{\frac{\Sigma_{i = 1}^{n} (x_i - \bar x )^2}{n-1}}$$
+--
+
+.pull-left[
+```{r}
+summarize(fastfood, 
+          sd(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+sd(fastfood$calories)
+```
+
+]
+
+
+---
+
+class: middle
+
+## Minimum
+
+.pull-left[
+```{r}
+summarize(fastfood, 
+          min(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+min(fastfood$calories)
+```
+
+]
+
+
+
+---
+
+## Maximum
+
+.pull-left[
+```{r}
+summarize(fastfood, 
+          max(calories))
+```
+]
+
+--
+
+.pull-right[
+
+```{r}
+max(fastfood$calories)
+```
+
+]
+
+
+
+---
+
+class: middle
+
+We can use multiple functions inside `summarize()`. 
+
+```{r}
+summarize(fastfood, 
+          mean(calories), 
+          median(calories),
+          var(calories),
+          sd(calories),
+          min(calories),
+          max(calories))
+```
+
+---
+
+class: middle
+
+We can use create variable names for the output (e.g. `mean_cal`). 
+
+```{r}
+summarize(fastfood, 
+          mea_cal = mean(calories), 
+          med_cal = median(calories),
+          var_cal = var(calories),
+          sd_cal = sd(calories),
+          min_cal = min(calories),
+          max_cal = max(calories))
+```
+
+---
+
+class: inverse middle
+
+.font50[Three solutions to a single problem]
+
+---
+
+class: middle
+
+What is the average of 4, 8, 16 approximately?
+
+---
+
+class: middle
+
+1.What is the average of **4, 8, 16** approximately?
+
+---
+
+class: middle
+
+2.What is the **average** of 4, 8, 16 approximately?
+
+---
+
+class: middle
+
+3.What is the average of 4, 8, 16 **approximately**?
+
+---
+
+class: middle inverse
+
+.font50[Solution 1: Functions within Functions]
+
+---
+
+class: middle
+
+```{r}
+c(4, 8, 16)
+```
+
+--
+
+<hr>
+
+```{r}
+mean(c(4, 8, 16))
+```
+
+--
+
+<hr>
+
+```{r}
+round(mean(c(4, 8, 16)))
+```
+
+---
+
+class: middle
+
+**Problem with writing functions within functions**
+
+Things will get messy and more difficult to read and debug as we deal with more complex operations on data.
+
+---
+
+class: middle inverse
+
+.font50[Solution 2: Creating Objects]
+
+---
+
+class: middle
+
+```{r}
+numbers <- c(4, 8, 16)
+numbers
+```
+
+--
+
+<hr>
+
+```{r}
+avg_number <- mean(numbers)
+avg_number
+```
+
+--
+
+<hr>
+
+```{r}
+round(avg_number)
+```
+
+---
+
+class: middle
+
+**Problem with creating many objects**
+
+We will end up with too many objects in `Environment`. 
+
+---
+
+class: middle inverse
+
+.font50[Solution 3: The (forward) Pipe Operator %>% ]
+
+---
+
+class: middle
+
+.font75[Shortcut: <br>Ctrl (Command) + Shift + M]
+
+---
+
+class: middle
+
+.pull-left[
+```{r}
+c(4, 8, 16) %>% 
+  mean() %>% 
+  round()
+```
+]
+
+.pull-right[
+
+Combine 4, 8, and 16 `and then`  
+Take the mean   `and then`  
+Round the output
+
+]
+
+
+
+
+---
+
+class: middle
+
+The output of the first function is the first argument of the second function.
+
+---
+
+class: middle
+
+Do you recall composite functions such as $f \circ g(x)$?
+
+--
+
+Now we have $f \circ g \circ h (x)$ or `round(mean(c(4, 8, 16)))`
+
+--
+
+.pull-left[
+
+```{r eval = FALSE}
+h(x) %>% 
+  g() %>% 
+  f()
+```
+
+]
+
+.pull-right[
+
+```{r eval = FALSE}
+c(4, 8, 16) %>% 
+  mean() %>% 
+  round()
+```
+
+]
+
+
+---
+
+class: middle
+
+We can use the pipe operator with the `summarize()` function. 
+
+```{r}
+summarize(fastfood, 
+          mea_cal = mean(calories), 
+          med_cal = median(calories),
+          var_cal = var(calories),
+          sd_cal = sd(calories),
+          min_cal = min(calories),
+          max_cal = max(calories))
+```
+
+---
+
+class: middle
+
+We so far have been summarizing data numerically. 
+In grouped data, we often want to do this for each group (e.g. left vs. right handed people, first-years vs. sophomores vs. juniors vs. seniors. etc.).
+
+---
+
+
+class: middle
+
+`group_by()`
+
+```{r echo = FALSE, out.width="80%", fig.align='center'}
+knitr::include_graphics("img/data-wrangle.003.jpeg")
+```
+
+`group_by()` separates the data frame by the groups. Any action following `group_by()` will be completed for each group separately.
+
+
+
+---
+
+Notice that the output indicates `Groups:   restaurant [8]`
+
+```{r}
+fastfood %>% 
+  group_by(restaurant)
+```
+
+
+---
+
+```{r}
+fastfood %>% 
+  group_by(restaurant) %>% 
+  summarize(med_calories = median(calories),
+            mean_calories = mean(calories))
+```
+
+
