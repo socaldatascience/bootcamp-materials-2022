@@ -25,15 +25,10 @@ class: title-slide
 ## `r rmarkdown::metadata$author`
 ]
 ---
-class: middle center
 
-.font150[Exploring Data]
-
-
----
 
 class: middle
-```{r message = FALSE}
+```{r message = FALSE, echo=FALSE}
 library(tidyverse)
 library(openintro)
 
