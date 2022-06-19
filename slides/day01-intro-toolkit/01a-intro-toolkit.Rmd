@@ -434,6 +434,11 @@ class: center middle
 
 class: middle
 
+.font50[Always use .Rproj file to open projects. Then open the appropriate .Rmd file from the Files pane.]
+---
+
+class: middle
+
 ## Cloning a repo
 
 **repo** is a short form of repository. Repositories contain all of your project's files as well as each file's revision history.
