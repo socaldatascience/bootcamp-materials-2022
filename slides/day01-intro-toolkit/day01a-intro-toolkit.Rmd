@@ -1,0 +1,494 @@
+---
+title: "Introduction to Toolkit"
+author: "Dr. Mine Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: ["slide-style.css"]
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+
+
+---
+
+class: title-slide
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+---
+
+
+class: inverse center middle
+
+.font75[Introduction to R & RStudio]
+
+---
+
+class: middle center
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/01a-hello-world.mp4" type="video/mp4">
+</video>
+
+
+---
+
+class: inverse middle center
+
+.font100[R review]
+
+---
+
+class: middle 
+
+## Object assignment operator
+
+```{r}
+birth_year <- 1950
+```
+
+
+--
+
+|                            | Windows        | Mac              |
+|----------------------------|----------------|------------------|
+| Shortcut     | Alt + -        | Option + -       |
+
+
+---
+
+class: middle
+
+## R is case-sensitive
+
+
+```{r error=TRUE}
+
+my_age <- 2020 - birth_year
+
+My_age
+```
+
+--
+
+
+---
+
+
+class: middle
+
+If something comes in quotes, it is not defined in R. 
+
+
+```{r}
+
+ages <- c(25, my_age, 32)
+
+names <- c("Menglin", "Mine", "Rafael")
+
+data.frame(age = ages, name = names)
+```
+
+---
+
+class: middle
+
+## Vocabulary
+
+```{r eval=FALSE}
+do(something)
+```
+
+`do()` is a function;   
+`something` is the argument of the function.
+--
+
+```{r eval=FALSE}
+do(something, colorful)
+```
+
+`do()` is a function;   
+`something` is the first argument of the function;   
+`colorful` is the second argument of the function.
+
+---
+
+class: middle
+
+## Getting Help
+
+In order to get any help we can use `?` followed by function (or object) name. 
+
+```{r eval=FALSE}
+?c
+```
+
+
+---
+
+class: middle
+
+## tidyverse_style_guide
+
+>canyoureadthissentence?
+
+
+--
+    
+.pull-right[
+
+```{r eval = FALSE}
+age <- c(6, 9, 15)
+
+data.frame(age_kid = age)
+```
+
+]
+
+--
+
+.pull-left[
+
+After function names do not leave any spaces.
+
+Before and after operators (e.g. <-, =) leave spaces. 
+
+Put a space after a comma, **not** before. 
+
+Object names are all lower case, with words separated by an underscore.
+
+]
+
+
+
+---
+
+class: middle center
+
+
+#### RStudio Setup
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/01b-rstudio-setup.mp4" type="video/mp4">
+</video>
+
+---
+
+
+class: inverse middle center
+
+.font150[R Markdown]
+
+---
+
+class: inverse middle center
+
+.font150[~~R~~ Markdown]
+
+---
+
+class: middle
+
+## markdown `r fontawesome::fa(name = "markdown", fill = "#4d2600")`
+
+<br>
+
+
+
+.pull-left[
+
+```
+_Hello world_ 
+
+__Hello world__
+
+~~Hello world~~ 
+```
+]
+
+.pull-right[
+
+_Hello world_ 
+
+__Hello world__
+
+~~Hello world~~ 
+]
+---
+
+class: center middle
+
+.font150[R .strike[Markdown]]
+
+---
+
+class: inverse middle
+
+.font100[`r fontawesome::fa(name = "r-project", fill = "white")` = .R file]
+
+.font100[`r fontawesome::fa(name = "markdown", fill = "white")` = .md file]
+
+.font100[`r fontawesome::fa(name = "r-project", fill = "white")` + `r fontawesome::fa(name = "markdown", fill = "white")` = .Rmd file]
+
+---
+
+class: center middle
+
+#### R Markdown
+
+
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/01c-intro-rmarkdown.mp4" type="video/mp4">
+</video>
+
+---
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('img/rmd-parts.jpeg')
+```
+
+---
+class: center middle
+
+## Add Chunk
+
+```{r echo=FALSE, out.width='50%'}
+knitr::include_graphics('img/code-chunk.png')
+```
+
+---
+
+class: center middle
+
+## Run the Current Chunk
+
+```{r echo=FALSE, out.width='20%'}
+knitr::include_graphics('img/run-code.png')
+```
+
+**Always** remember to run codes that I have provided for you before going over lecture notes and/or doing assignments.
+
+---
+
+class: center middle 
+
+## Knit
+
+```{r echo=FALSE, out.width='50%'}
+knitr::include_graphics('img/knit.png')
+```
+
+---
+
+class: middle center
+
+
+## Shortcuts
+
+|                            | Windows          | Mac              |
+|----------------------------|------------------|------------------|
+| add chunk                  | Ctrl + Alt + I   | Cmd + Option + I |
+| run the current chunk      | Ctrl + Alt + C   | Cmd + Option + C |
+| run current line/selection | Ctrl + Enter     | Cmd + Return     |
+| knit                       | Ctrl + Shift + K | Cmd + Shift + K  |
+
+
+---
+
+class: middle
+
+## Slides for this bootcamp
+
+Slides that you are currently looking at are also written in R Markdown. You can take a look at them on [GitHub repo](https://github.com/socaldatascience/bootcamp-materials/tree/main/slides) for the bootcamp website.
+
+---
+
+class: center middle inverse
+
+.font75[Introduction to Git and GitHub]
+
+---
+
+
+class: inverse center middle 
+
+.font75[version control]
+
+---
+
+class: middle
+
+hw1
+
+--
+
+hw1_final
+
+--
+
+hw1_final2
+
+--
+
+hw1_final3
+
+--
+
+hw1_finalwithfinalimages
+
+--
+
+hw1_finalestfinal
+
+---
+
+class: middle
+
+What if we tracked our file with a better names for each version and have only 1 file **hw1**?
+
+--
+
+hw1 **added questions 1 through 5**
+
+--
+
+hw1 **changed question 1 image**
+
+--
+
+hw1 **fixed typos**
+
+--
+
+We will call the descriptions in bold **commit** messages.
+
+---
+
+class: middle
+
+## git vs. GitHub
+
+- git allows us to keep track of different versions of a file(s).
+
+- GitHub is a website where we can store (and share) different versions of the files. 
+
+---
+
+```{r echo=FALSE, out.width='40%',fig.align='center'}
+knitr::include_graphics('img/github-illustration.002.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.003.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.004.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.005.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.006.jpeg')
+```
+
+---
+
+```{r echo=FALSE, out.width='55%', fig.align='center'}
+knitr::include_graphics('img/github-illustration.007.jpeg')
+```
+
+
+---
+
+
+class: center middle
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/01h-intro-github.mp4" type="video/mp4">
+</video>
+
+
+---
+
+class: middle
+
+## Cloning a repo
+
+**repo** is a short form of repository. Repositories contain all of your project's files as well as each file's revision history.
+
+For this bootcamp our daily repos (lecture code, activity etc.) are hosted on Github. 
+
+To **clone** a GitHub repo to our computer, we first copy the cloning link as shown in screencast then start an RStudio project using that link.  
+
+**Cloning** a repo pulls (downloads) all the elements of a repo available at that specific time. 
+
+---
+
+class: middle
+
+## Commits
+
+Once you make changes to your repo (e.g. take notes during lecture, answer an activity question). you can take a snapshot of your changes with a commit.
+
+This way if you ever have to go back in version history you have your older commits to get back to. 
+
+This is especially useful, for instance, if you want to go back to an earlier solution you have committed.
+
+---
+
+class: middle
+
+## Push
+
+All the commits you make will initially be local (i.e. on your own computer). 
+
+In order for me to see your commits and your final submission on any file, you have to **push** your commits. In other words upload your files at the stage in that specific time.
+
+
+---
+
+class: middle
+
+## (An incomplete) Git/GitHub glossary
+
+**Git:** is software for tracking changes in any set of files
+
+**GitHub:** is an internet host for Git projects.
+
+**repo:** is a short form of repository. Repositories contain all of your project's files as well as each file's revision history.
+
+**clone:** Cloning a repo **pulls** (downloads) all the elements of a repo available at that specific time. 
+
+**commit:** A snapshot of your repo at a specific point in time. We distinguish each commit with a **commit message**. 
+
+**push:** Uploads the latest "committed" state of your repo to GitHub.
+
+---
+
+class: middle center
+
+.font75[Do you git it?]
+
+
