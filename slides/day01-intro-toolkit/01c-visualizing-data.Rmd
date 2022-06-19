@@ -207,7 +207,7 @@ __gram__: comes from the Greek word _gramma_ which means "that which is drawn".
 
 ---
 
-## Histogram vs. violin
+## Histogram vs. boxplot
 
 .pull-left[
 
@@ -245,7 +245,7 @@ Tail tells the tale.
 ```{r echo = FALSE, fig.height=5, cache = TRUE, message = FALSE}
 data %>% 
   ggplot(aes(x = 1, y = x)) +
-  geom_violin() +
+  geom_boxplot() +
     theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
@@ -1196,4 +1196,535 @@ ggplot(penguins,
 knitr::include_graphics("img/ggplot-summary.jpeg")
 ```
 
+---
+
+
+class: middle 
+ 
+
+.panelset[
+.panel[
+
+.panel-name[Plot]
+
+```{r echo = FALSE, fig.align='center', warning = FALSE, fig.height=5}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) 
+```
+
+]
+
+.panel[
+
+.panel-name[English]
+- Using the `penguins` data,   
+- Map `bill depth` to x-axis, `bill length` to y-axis, `species` to shape and color.
+- Add a layer of points and set the size of the points to 4.
+]
+
+.panel[
+.panel-name[R]
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) 
+```
+
+]
+
+]
+
+
+---
+
+class: middle 
+
+## Labs
+
+
+.panelset[
+.panel[
+
+.panel-name[Plot]
+
+```{r echo = FALSE, fig.align='center', warning = FALSE, fig.height=5}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  labs(x = "Bill Depth (mm)", #<<
+       y = "Bill Length (mm)", #<<
+       title = "Palmer Penguins") #<<
+```
+
+]
+
+.panel[
+
+.panel-name[English]
+- Using the `penguins` data,   
+- Map `bill depth` to x-axis, `bill length` to y-axis, `species` to shape.
+- Add a layer of points and set the size of the points to 4.
+- .highlight-text[Add labels to x-axis (Bill Depth(mm)), y-axis (Bill Length(mm)), and the title of the plot (Palmer Penguins).]
+
+
+
+.panel[
+.panel-name[R]
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  labs(x = "Bill Depth (mm)", #<<
+       y = "Bill Length (mm)", #<<
+       title = "Palmer Penguins") #<<
+```
+
+]
+
+]
+
+
+
+]
+
+---
+
+class: middle
+
+.left-panel[
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       title = "Palmer Penguins") +
+  theme_bw() #<<
+  
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE, fig.height=5, warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)",
+       y = "Bill Length (mm)",
+       title = "Palmer Penguins") +
+  theme_bw()
+```
+
+]
+
+---
+
+class: middle
+
+## Themes
+
+.panelset[
+
+
+.panel[
+
+.panel-name[`theme_gray()`]
+
+```{r echo = FALSE, fig.height=4, fig.align='center', warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)",
+       y = "Bill Length (mm)",
+       title = "Palmer Penguins") +
+  theme_gray()
+```
+
+]
+
+.panel[
+
+.panel-name[`theme_bw()`]
+
+```{r echo = FALSE, fig.height=4, fig.align='center', warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)",
+       y = "Bill Length (mm)",
+       title = "Palmer Penguins") +
+  theme_bw()
+```
+
+]
+
+.panel[
+
+.panel-name[`theme_classic()`]
+
+```{r echo = FALSE, fig.height=4, fig.align='center', warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)",
+       y = "Bill Length (mm)",
+       title = "Palmer Penguins") +
+  theme_classic()
+```
+
+]
+
+.panel[
+
+.panel-name[`theme_dark()`]
+
+```{r echo = FALSE, fig.height=4, fig.align='center', warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)",
+       y = "Bill Length (mm)",
+       title = "Palmer Penguins") +
+  theme_dark()
+```
+
+]
+
+.panel[
+.panel-name[`theme_minimal()`]
+
+```{r echo = FALSE, fig.height=4, fig.align='center', warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)",
+       y = "Bill Length (mm)",
+       title = "Palmer Penguins") +
+  theme_minimal()
+```
+
+]
+
+
+.panel[
+.panel-name[`theme_void()`]
+
+```{r echo = FALSE, fig.height=4, fig.align='center', warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)",
+       y = "Bill Length (mm)",
+       title = "Palmer Penguins") +
+  theme_void()
+```
+
+]
+]
+
+---
+
+class: middle 
+
+.left-panel[
+
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       title = "Palmer Penguins") +
+  theme_bw() +
+  theme(text = element_text(size=20)) #<<
+  
+```
+
+]
+
+.right-panel[
+
+```{r echo = FALSE, fig.height=5, warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)",
+       y = "Bill Length (mm)",
+       title = "Palmer Penguins") +
+  theme_bw() +
+  theme(text = element_text(size=20))
+```
+]
+
+
+---
+
+class: middle
+
+```{r eval = FALSE}
+?theme
+```
+
+
+---
+
+class: middle 
+ 
+
+.left-panel[
+
+```{r eval = FALSE, fig.align='center', warning = FALSE, fig.height=5}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  facet_grid(.~species) #<<
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE, fig.align='center', warning = FALSE, fig.height=5}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  facet_grid(.~species)
+```
+]
+
+---
+
+class: middle 
+ 
+
+.left-panel[
+
+```{r eval = FALSE, fig.align='center', warning = FALSE, fig.height=5}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  facet_grid(species~.) #<<
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE, fig.align='center', warning = FALSE, fig.height=5}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  facet_grid(species~.)
+```
+]
+
+---
+
+class: middle
+
+.left-panel[
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm)) +
+  geom_point() +
+  xlim(0, 30) + #<<
+  ylim(0,70) #<<
+  
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE, fig.height=5, warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm)) +
+  geom_point() +
+  xlim(0, 30) +
+  ylim(0,70)
+```
+
+]
+
+
+---
+
+class: middle
+
+## code style
+
+[The tidyverse style guide](https://style.tidyverse.org/ggplot2.html) has the following convention for writing ggplot2 code.
+
+Similar to the piper operator`%>%`, the plus sign for adding layers `+` always has a space before it and is followed by a new line. 
+
+The new line is indented by two spaces. RStudio does this automatically for you. 
+
+---
+class: middle
+
+[Top Ten Dos and Don't for Charts and Graphs](https://guides.lib.uci.edu/datavis/do)
+
+---
+
+class: middle
+
+Check out [the ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html#1) for some inspiration. 
+Find your favorite new function/feature. 
+Share it with your neighbor.
+
+
+---
+
+class: middle 
+
+## ggplot extensions
+
+- [`patchwork`](https://patchwork.data-imaginist.com/) combining plots into a single plot
+- [`gganimate`](https://gganimate.com/) animated graphics
+- [`ggthemes`](https://rafalab.github.io/dsbook/ggplot2.html#add-on-packages) additional set of themes
+- [`ggtext`](https://wilkelab.org/ggtext/) improved text rendering support for ggplot2
+
+There are [more extensions](https://exts.ggplot2.tidyverse.org/gallery/)
+
+---
+
+class: middle center inverse
+
+.font75[Making Accessible Visualizations]
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): red-blind/protanopia
+
+```{r echo=FALSE, out.width="60%", fig.align='center'}
+knitr::include_graphics("img/red-blind.png")
+```
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): green-blind/deuteranopia
+
+```{r echo=FALSE, out.width="60%", fig.align='center'}
+knitr::include_graphics("img/green-blind.png")
+```
+
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): blue-blind/tritanopia
+
+```{r echo=FALSE, out.width="60%", fig.align='center'}
+knitr::include_graphics("img/blue-blind.png")
+```
+
+---
+
+class: middle 
+
+```{r}
+palette.colors(palette = "Okabe-Ito")
+```
+
+[Okabe-Ito color palette](https://jfly.uni-koeln.de/color/) allows us to make figures that are colorblind friendly.
+You can use the HEX code printed for selecting colors.
+
+---
+
+class: middle
+
+.left-panel[
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  facet_grid(species~.) +
+  scale_color_manual(values = #<<
+                      c("#E69F00", #<<
+                        "#009E73", #<<
+                        "#56B4E9")) #<<
+  
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE, fig.height=5, warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  facet_grid(species~.) +
+  scale_color_manual(values = 
+                      c("#E69F00",
+                        "#009E73",
+                        "#56B4E9"))
+```
+
+]
 

@@ -153,7 +153,7 @@ __gram__: comes from the Greek word _gramma_ which means "that which is drawn".
 
 ---
 
-## Histogram vs. violin
+## Histogram vs. boxplot
 
 .pull-left[
 
@@ -1026,6 +1026,403 @@ ggplot(penguins,
 
 &lt;img src="img/ggplot-summary.jpeg" width="95%" /&gt;
 
+---
+
+
+class: middle 
+ 
+
+.panelset[
+.panel[
+
+.panel-name[Plot]
+
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-73-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[English]
+- Using the `penguins` data,   
+- Map `bill depth` to x-axis, `bill length` to y-axis, `species` to shape and color.
+- Add a layer of points and set the size of the points to 4.
+]
+
+.panel[
+.panel-name[R]
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) 
+```
+
+]
+
+]
+
+
+---
+
+class: middle 
+
+## Labs
+
+
+.panelset[
+.panel[
+
+.panel-name[Plot]
+
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-75-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[English]
+- Using the `penguins` data,   
+- Map `bill depth` to x-axis, `bill length` to y-axis, `species` to shape.
+- Add a layer of points and set the size of the points to 4.
+- .highlight-text[Add labels to x-axis (Bill Depth(mm)), y-axis (Bill Length(mm)), and the title of the plot (Palmer Penguins).]
+
+
+
+.panel[
+.panel-name[R]
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+* labs(x = "Bill Depth (mm)",
+*      y = "Bill Length (mm)",
+*      title = "Palmer Penguins")
+```
+
+]
+
+]
+
+
+
+]
+
+---
+
+class: middle
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       title = "Palmer Penguins") +
+* theme_bw()
+```
+
+]
+
+.right-panel[
+![](01c-visualizing-data_files/figure-html/unnamed-chunk-78-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+class: middle
+
+## Themes
+
+.panelset[
+
+
+.panel[
+
+.panel-name[`theme_gray()`]
+
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-79-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[`theme_bw()`]
+
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-80-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[`theme_classic()`]
+
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-81-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[`theme_dark()`]
+
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-82-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[`theme_minimal()`]
+
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-83-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.panel[
+.panel-name[`theme_void()`]
+
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-84-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+class: middle 
+
+.left-panel[
+
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       title = "Palmer Penguins") +
+  theme_bw() +
+* theme(text = element_text(size=20))
+```
+
+]
+
+.right-panel[
+
+![](01c-visualizing-data_files/figure-html/unnamed-chunk-86-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+class: middle
+
+
+```r
+?theme
+```
+
+
+---
+
+class: middle 
+ 
+
+.left-panel[
+
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+* facet_grid(.~species)
+```
+
+]
+
+.right-panel[
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-89-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle 
+ 
+
+.left-panel[
+
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+* facet_grid(species~.)
+```
+
+]
+
+.right-panel[
+&lt;img src="01c-visualizing-data_files/figure-html/unnamed-chunk-91-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm)) +
+  geom_point() +
+* xlim(0, 30) +
+* ylim(0,70)
+```
+
+]
+
+.right-panel[
+![](01c-visualizing-data_files/figure-html/unnamed-chunk-93-1.png)&lt;!-- --&gt;
+
+]
+
+
+---
+
+class: middle
+
+## code style
+
+[The tidyverse style guide](https://style.tidyverse.org/ggplot2.html) has the following convention for writing ggplot2 code.
+
+Similar to the piper operator`%&gt;%`, the plus sign for adding layers `+` always has a space before it and is followed by a new line. 
+
+The new line is indented by two spaces. RStudio does this automatically for you. 
+
+---
+class: middle
+
+[Top Ten Dos and Don't for Charts and Graphs](https://guides.lib.uci.edu/datavis/do)
+
+---
+
+class: middle
+
+Check out [the ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html#1) for some inspiration. 
+Find your favorite new function/feature. 
+Share it with your neighbor.
+
+
+---
+
+class: middle 
+
+## ggplot extensions
+
+- [`patchwork`](https://patchwork.data-imaginist.com/) combining plots into a single plot
+- [`gganimate`](https://gganimate.com/) animated graphics
+- [`ggthemes`](https://rafalab.github.io/dsbook/ggplot2.html#add-on-packages) additional set of themes
+- [`ggtext`](https://wilkelab.org/ggtext/) improved text rendering support for ggplot2
+
+There are [more extensions](https://exts.ggplot2.tidyverse.org/gallery/)
+
+---
+
+class: middle center inverse
+
+.font75[Making Accessible Visualizations]
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): red-blind/protanopia
+
+&lt;img src="img/red-blind.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): green-blind/deuteranopia
+
+&lt;img src="img/green-blind.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): blue-blind/tritanopia
+
+&lt;img src="img/blue-blind.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle 
+
+
+```r
+palette.colors(palette = "Okabe-Ito")
+```
+
+```
+##         black        orange       skyblue   bluishgreen        yellow 
+##     "#000000"     "#E69F00"     "#56B4E9"     "#009E73"     "#F0E442" 
+##          blue    vermillion reddishpurple          gray 
+##     "#0072B2"     "#D55E00"     "#CC79A7"     "#999999"
+```
+
+[Okabe-Ito color palette](https://jfly.uni-koeln.de/color/) allows us to make figures that are colorblind friendly.
+You can use the HEX code printed for selecting colors.
+
+---
+
+class: middle
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  facet_grid(species~.) +
+* scale_color_manual(values =
+*                     c("#E69F00",
+*                       "#009E73",
+*                       "#56B4E9"))
+```
+
+]
+
+.right-panel[
+![](01c-visualizing-data_files/figure-html/unnamed-chunk-99-1.png)&lt;!-- --&gt;
+
+]
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

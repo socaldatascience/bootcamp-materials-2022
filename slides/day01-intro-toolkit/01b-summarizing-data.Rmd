@@ -474,7 +474,6 @@ knitr::include_graphics("img/data-wrangle.003.jpeg")
 `group_by()` separates the data frame by the groups. Any action following `group_by()` will be completed for each group separately.
 
 
-
 ---
 
 Notice that the output indicates `Groups:   restaurant [8]`
@@ -493,5 +492,6 @@ fastfood %>%
   summarize(med_calories = median(calories),
             mean_calories = mean(calories))
 ```
+
 
 
