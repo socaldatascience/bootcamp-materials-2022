@@ -26,7 +26,11 @@ output:
 
 ## Day 1
 
-TBD - Ice Breaker
+| Topic                         | Materials |
+|-------------------------------|-----------|
+| Introduction to Toolkit       |[`r fontawesome::fa(name = "desktop")`](slides/day01-intro-toolkit/01a-intro-toolkit.html)           |
+| Summarizing Data with Numbers |[`r fontawesome::fa(name = "desktop")`](slides/day01-intro-toolkit/01b-summarizing-data.html)                    |
+| Visualizing Data              |[`r fontawesome::fa(name = "desktop")`](slides/day01-intro-toolkit/01c-visualizing-data.html)           |
 
 ## Day 2
 
