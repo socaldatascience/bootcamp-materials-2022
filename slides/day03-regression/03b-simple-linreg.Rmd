@@ -1,0 +1,107 @@
+---
+title: "Introduction"
+author: "Dr. Mine Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: ["slide-style.css"]
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+
+
+---
+
+class: title-slide
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+---
+
+
+
+class: middle center
+
+
+.font150[Some new topic]
+
+
+---
+
+class: middle
+
+```{r}
+library(magrittr)
+lm(mpg ~ am, data = mtcars) %>% 
+  broom::tidy()
+```
+
+
+---
+
+## Notes
+
+>Some brilliant quote by someone  
+
+.important[
+
+We can highlight important text.
+
+]
+
+- Great thing 1
+
+- Great thing 2
+
+Here is a [link](https://www.cosmos.uci.edu/welcome-to-your-new-website/cluster-1-data-science-in-health-sciences/)
+
+.footnote[
+
+Some footnote
+]
+
+---
+
+## R code
+
+```{r, message=FALSE, eval = FALSE}
+library(beep)
+beepr()
+```
+
+Also mention it in line `beepr::beep()`
+
+
+Or even highlight it
+
+```{r, message=FALSE, eval = FALSE}
+library(beep)
+beepr() #<<
+```
+---
+
+## Math
+
+$$x+7\beta$$
+
+Even more math:
+
+$x+7 +\mu$
+
+---
+
+## Figure
+
+```{r, echo=FALSE,out.width='40%',fig.align='center'}
+knitr::include_graphics('img/socalds-logo.png')
+```
+
