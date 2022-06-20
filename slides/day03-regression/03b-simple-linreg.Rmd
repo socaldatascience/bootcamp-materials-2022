@@ -25,83 +25,170 @@ class: title-slide
 ## `r rmarkdown::metadata$author`
 ]
 
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(gridExtra)
+library(openintro)
+library(broom)
+options(scipen = 999)
+```
+
 ---
 
 
+class: middle
 
-class: middle center
+<div align = "center">
+
+| y | Response    | Birth weight | Numeric |
+|---|-------------|-----------------|---------|
+| x | Explanatory | Smoke           | Categorical |
 
 
-.font150[Some new topic]
+---
 
+## Notation
+
+$y_i = \beta_0 +\beta_1x_i + \epsilon_i$
+
+$\beta_0$ is y-intercept  
+$\beta_1$ is slope  
+$\epsilon_i$ is error/residual  
+$i = 1, 2, ...n$ identifier for each point
+
+
+---
+
+```{r}
+model_s <- lm(bwt ~ smoke, data = babies)
+tidy(model_s)
+```
+
+
+
+--
+
+$\hat {y}_i = b_0 + b_1 x_i$
+
+$\hat {\text{bwt}_i} = b_0 + b_1 \text{ smoke}_i$
+
+$\hat {\text{bwt}_i} = 123 + (-8.94\text{ smoke}_i)$
 
 ---
 
 class: middle
 
+.pull-left[
+
+#### Expected bwt for a baby with a non-smoker mother
+
+$\hat {\text{bwt}_i} = 123 + (-8.94\text{ smoke}_i)$
+
+$\hat {\text{bwt}_i} = 123 + (-8.94\times 0)$
+
+$\hat {\text{bwt}_i} = 123$
+
+$E[bwt_i | smoke_i = 0] = b_0$
+
+
+]
+
+--
+
+.pull-right[
+#### Expected bwt for a baby with a smoker mother
+
+$\hat {\text{bwt}_i} = 123 + (-8.94\text{ smoke}_i)$
+
+$\hat {\text{bwt}_i} = 123 + (-8.94\times 1)$
+
+$\hat {\text{bwt}_i} = 114.06$
+
+$E[bwt_i | smoke_i = 1] = b_0 + b_1$
+
+]
+
+---
+
 ```{r}
-library(magrittr)
-lm(mpg ~ am, data = mtcars) %>% 
-  broom::tidy()
+confint(model_s)
 ```
+
+Note that the confidence interval for the "slope" does not contain 0 and all the values in the interval are negative. 
+
+---
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+library(openintro)
+library(broom)
+theme_set(theme_gray(base_size = 18))
+```
+
+#### Data `babies` in `openintro` package
+
+```{r echo = FALSE}
+glimpse(babies)
+```
+
+---
+
+
+class: middle
+
+<div align = "center">
+
+| y | Response    | Birth weight | Numeric |
+|---|-------------|-----------------|---------|
+| $x_1$ | Explanatory | Gestation           | Numeric |
+| $x_2$ | Explanatory | Smoke           | Categorical |
+
+---
+
+## Notation
+
+$y_i = \beta_0 +\beta_1x_{1i}  + \beta_2x_{2i} + \epsilon_i$
+
+$\beta_0$ is intercept  
+$\beta_1$ is the slope for gestation   
+$\beta_2$ is the slope for smoke 
+$\epsilon_i$ is error/residual  
+$i = 1, 2, ...n$ identifier for each point
 
 
 ---
 
-## Notes
+```{r}
+model_gs <- lm(bwt ~ gestation + smoke, data = babies)
+tidy(model_gs)
+```
 
->Some brilliant quote by someone  
+--
 
-.important[
+Expected birth weight for a baby who had 280 days of gestation with a smoker mother
 
-We can highlight important text.
+$\hat {\text{bwt}_i} = b_0 + b_1 \text{ gestation}_i + b_2 \text{ smoke}_i$
 
-]
-
-- Great thing 1
-
-- Great thing 2
-
-Here is a [link](https://www.cosmos.uci.edu/welcome-to-your-new-website/cluster-1-data-science-in-health-sciences/)
-
-.footnote[
-
-Some footnote
-]
+$\hat {\text{bwt}_i} = -0.932 + (0.443 \times 280) + (-8.09 \times 1)$
 
 ---
 
-## R code
-
-```{r, message=FALSE, eval = FALSE}
-library(beep)
-beepr()
+```{r}
+babies %>% 
+  modelr::add_predictions(model_gs) %>% 
+  select(bwt, gestation, smoke, pred)
 ```
-
-Also mention it in line `beepr::beep()`
-
-
-Or even highlight it
-
-```{r, message=FALSE, eval = FALSE}
-library(beep)
-beepr() #<<
-```
----
-
-## Math
-
-$$x+7\beta$$
-
-Even more math:
-
-$x+7 +\mu$
 
 ---
 
-## Figure
-
-```{r, echo=FALSE,out.width='40%',fig.align='center'}
-knitr::include_graphics('img/socalds-logo.png')
+```{r}
+babies %>% 
+  modelr::add_predictions(model_gs) %>% 
+  modelr::add_residuals(model_gs) %>% 
+  select(bwt, gestation, smoke, pred, resid)
 ```
+
+
+
+
 
