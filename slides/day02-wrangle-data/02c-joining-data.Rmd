@@ -1,0 +1,349 @@
+---
+title: "Joining Data"
+author: "Dr. Mine Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: ["slide-style.css"]
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+
+
+---
+
+class: title-slide
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+library(janitor)
+options(scipen = 999)
+```
+
+```{r echo = FALSE, message = FALSE}
+
+xaringanExtra::use_panelset()
+
+artists <- readxl::read_xlsx("../data/spotify.xlsx", sheet = "artist")
+songs <- readxl::read_xlsx("../data/spotify.xlsx", sheet = "top_song")
+albums <- readxl::read_xlsx("../data/spotify.xlsx", sheet = "album") %>% 
+  mutate(album_release_date = lubridate::ymd(album_release_date))
+```
+
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+---
+
+class: middle
+
+```{r echo = FALSE}
+knitr::include_graphics("img/data_joins.png")
+```
+
+.font15[Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)] 
+
+---
+
+class: middle
+
+## Inner Join
+
+```{r echo = FALSE}
+knitr::include_graphics("img/inner_join.png")
+```
+
+.font15[Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)] 
+
+---
+
+
+class: middle
+
+#### Outer Joins
+
+```{r echo = FALSE, out.width="40%"}
+knitr::include_graphics("img/outer_joins.png")
+```
+
+.font15[Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)] 
+
+---
+
+class: middle
+
+## Data Joins
+
+```{r echo = FALSE, out.width="80%"}
+knitr::include_graphics("img/join_venn.png")
+```
+
+.font15[Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)] 
+
+---
+
+.panelset[
+.panel[
+.panel-name[artists]
+
+```{r}
+artists
+```
+
+
+]
+
+.panel[
+.panel-name[songs]
+
+```{r}
+songs
+```
+
+
+]
+
+.panel[
+.panel-name[albums]
+
+```{r}
+albums
+```
+
+]
+]
+
+---
+
+class: middle
+
+```{r echo = FALSE, out.width="90%"}
+knitr::include_graphics("img/data_joins_spotify.png")
+```
+
+---
+
+class: middle
+
+## Join Functions
+
+`something_join(x, y)` All the join functions in dplyr package are in this fashion where x represents the first data frame and y represents the second data frame.
+
+
+
+---
+
+.panelset[
+.panel[
+
+.panel-name[x]
+
+```{r}
+songs
+```
+
+
+]
+
+.panel[
+
+.panel-name[y]
+
+```{r}
+albums
+```
+
+
+]
+
+.panel[
+
+.panel-name[left_join()]
+
+```{r}
+left_join(songs, albums, by = "album_name")
+```
+
+]
+
+]
+
+`left_join()` includes all rows from x
+
+
+
+---
+
+.panelset[
+.panel[
+
+.panel-name[x]
+
+```{r}
+songs
+```
+
+
+]
+
+.panel[
+
+.panel-name[y]
+
+```{r}
+albums
+```
+
+
+]
+
+.panel[
+
+.panel-name[right_join()]
+
+```{r}
+right_join(songs, albums, by = "album_name")
+```
+
+]
+
+]
+
+`right_join()` includes all rows from `y`
+
+---
+
+.panelset[
+.panel[
+
+.panel-name[x]
+
+```{r}
+songs
+```
+
+
+]
+
+.panel[
+
+.panel-name[y]
+
+```{r}
+albums
+```
+
+
+]
+
+.panel[
+
+.panel-name[inner_join()]
+
+```{r}
+inner_join(songs, albums, by = "album_name")
+```
+
+]
+
+]
+
+`inner_join()` includes all rows that are in x **and** y
+
+---
+
+.panelset[
+.panel[
+
+.panel-name[x]
+
+```{r}
+songs
+```
+
+
+]
+
+.panel[
+
+.panel-name[y]
+
+```{r}
+albums
+```
+
+
+]
+
+.panel[
+
+.panel-name[full_join()]
+
+```{r}
+full_join(songs, albums, by = "album_name")
+```
+
+]
+
+]
+
+`full_join()` includes all rows that are in x **or** y
+
+---
+
+
+.panelset[
+.panel[
+.panel-name[artists]
+
+```{r}
+artists
+```
+
+
+]
+
+.panel[
+.panel-name[songs]
+
+```{r}
+songs
+```
+
+
+]
+
+.panel[
+.panel-name[albums]
+
+```{r}
+albums
+```
+
+]
+
+.panel[
+.panel-name[combined]
+
+```{r}
+full_join(artists, songs, by = "name") %>% 
+  full_join(albums, by = "album_name")
+  
+```
+
+
+]
+
+
+]
+
+

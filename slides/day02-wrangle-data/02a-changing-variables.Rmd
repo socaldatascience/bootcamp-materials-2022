@@ -1,0 +1,245 @@
+---
+title: "Changing Variables"
+author: "Dr. Mine Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: ["slide-style.css"]
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+
+
+---
+
+class: title-slide
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+---
+
+class: center middle
+
+.font150[Review]
+
+---
+
+class: middle
+
+How many panes have we seen in RStudio and what is the purpose of each pane?
+
+---
+
+class: middle
+
+Which of the following files is a markdown file?
+
+a. `example.R`  
+b. `example.md`  
+c. `example.Rmd`  
+
+---
+
+
+class: middle
+
+Which of the following is a valid order of actions when starting a project using git and GitHub?
+
+a. clone, commit, push, 
+
+b. push, commit, clone
+
+c. commit, clone, push
+
+d. clone, push, commit
+
+---
+
+class: middle
+
+Which R functions have we learned together?
+
+---
+
+
+class: center middle
+
+.font150[Changing Variables]
+
+
+---
+
+
+class: middle
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+library(janitor)
+options(scipen = 999)
+```
+
+
+
+```{r echo = FALSE, message = FALSE}
+lapd <- read_csv(here::here("slides/data/Police_Payroll.csv")) %>% 
+  select(2, 7, 17)
+```
+
+
+```{r}
+glimpse(lapd)
+```
+
+---
+
+class: middle
+
+`clean_names()` makes variable names in tidy style.
+
+```{r}
+
+lapd <- clean_names(lapd)
+glimpse(lapd)
+```
+
+
+---
+
+class: middle
+
+**Goal**: 
+
+Create a new variable called `base_pay_k` that represents `base_pay` in thousand dollars.
+
+---
+
+class: middle
+
+```{r}
+lapd %>% 
+  mutate(base_pay_k = base_pay/1000)
+```
+
+---
+
+class: middle
+
+```{r}
+glimpse(lapd)
+```
+
+**Goal**: 
+
+Create a new variable called `base_pay_level` which has `Less Than 0`, `No Income`, `Less than Median and Greater than 0` and `Greater than Median`. We will consider $62474 as the median (from previous lecture).
+
+---
+
+
+```{r}
+lapd %>% 
+  mutate(base_pay_level = case_when(
+    base_pay < 0 ~ "Less than 0", 
+    base_pay == 0 ~ "No Income",
+    base_pay < 62474 & base_pay > 0 ~ "Less than Median, Greater than 0",
+    base_pay > 62474 ~ "Greater than Median")) 
+```
+
+
+---
+
+class: middle
+
+## (Some) Variable Types in R
+
+`character`: takes string values (e.g. a person's name, address)  
+`integer`: integer (single precision)  
+`double`: floating decimal (double precision)  
+`numeric`: integer or double  
+`factor`: categorical variables with different levels  
+`logical`: TRUE (1), FALSE (0)  
+
+---
+
+class: middle
+
+```{r}
+glimpse(lapd)
+```
+
+**Goal**: 
+
+Change `year` and `employment_type` to appropriate variable types. 
+
+
+---
+
+class: middle
+
+```{r}
+lapd %>% 
+  mutate(employment_type = as.factor(employment_type),
+         year = as.integer(year)) 
+```
+
+---
+
+class: middle
+
+`as.factor()` - makes a vector factor  
+`as.numeric()` - makes a vector numeric  
+`as.integer()` - makes a vector integer  
+`as.double()` - makes a vector double  
+`as.character()` - makes a vector character  
+
+---
+
+
+In your lecture notes, you can do all the changes in this lecture in one long set of piped code. That's the beauty of piping!
+
+```{r eval = FALSE}
+lapd <- 
+  lapd %>% 
+  clean_names() %>% 
+    mutate(employment_type = as.factor(employment_type),
+           year = as.integer(year),
+           base_pay_level = case_when(
+             base_pay < 0 ~ "Less than 0", 
+             base_pay == 0 ~ "No Income",
+             base_pay < 62474 & base_pay > 0 ~ "Less than Median, Greater than 0",
+             base_pay > 62474 ~ "Greater than Median")) 
+```
+
+---
+
+class: middle
+
+## Word of caution
+
+The functions `clean_names()`, and `mutate()` all take a data frame as the first argument. Even though we do not see it, the data frame is piped through from the previous step of code at each step. 
+When we use these functions without the `%>%` we have to include the data frame explicitly.
+
+
+.pull-left[
+Data frame is used as the first argument
+```{r}
+clean_names(lapd)
+```
+]
+
+.pull-right[
+Data frame is piped
+
+```{r}
+lapd %>% 
+  clean_names()
+```
+]
