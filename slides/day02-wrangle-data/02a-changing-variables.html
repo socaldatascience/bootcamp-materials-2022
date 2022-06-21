@@ -66,6 +66,20 @@ Which R functions have we learned together?
 
 ---
 
+class: middle
+
+What is the formula for variance?
+
+---
+
+class: middle
+
+You are given a data frame called `registrar`. There are two variables you are interested in `class_year` which represents whether someone is a first year, sophomore, junior, or senior and `gpa` which represents GPA. 
+
+How would you find the average GPA for each class rank?
+
+---
+
 
 class: center middle
 
@@ -92,9 +106,9 @@ glimpse(lapd)
 ```
 ## Rows: 68,564
 ## Columns: 3
-## $ Year              &lt;dbl&gt; 2013, 2013, 2013, 2013, 2013, 20…
-## $ `Employment Type` &lt;chr&gt; "Full Time", "Full Time", "Full …
-## $ `Base Pay`        &lt;dbl&gt; 105764.79, 47662.40, 101287.85, …
+## $ Year              &lt;dbl&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013…
+## $ `Employment Type` &lt;chr&gt; "Full Time", "Full Time", "Full Time", "Full Time", …
+## $ `Base Pay`        &lt;dbl&gt; 105764.79, 47662.40, 101287.85, 118086.71, 90321.86,…
 ```
 
 ---
@@ -112,9 +126,9 @@ glimpse(lapd)
 ```
 ## Rows: 68,564
 ## Columns: 3
-## $ year            &lt;dbl&gt; 2013, 2013, 2013, 2013, 2013, 2013…
-## $ employment_type &lt;chr&gt; "Full Time", "Full Time", "Full Ti…
-## $ base_pay        &lt;dbl&gt; 105764.79, 47662.40, 101287.85, 11…
+## $ year            &lt;dbl&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, …
+## $ employment_type &lt;chr&gt; "Full Time", "Full Time", "Full Time", "Full Time", "F…
+## $ base_pay        &lt;dbl&gt; 105764.79, 47662.40, 101287.85, 118086.71, 90321.86, 6…
 ```
 
 
@@ -165,9 +179,9 @@ glimpse(lapd)
 ```
 ## Rows: 68,564
 ## Columns: 3
-## $ year            &lt;dbl&gt; 2013, 2013, 2013, 2013, 2013, 2013…
-## $ employment_type &lt;chr&gt; "Full Time", "Full Time", "Full Ti…
-## $ base_pay        &lt;dbl&gt; 105764.79, 47662.40, 101287.85, 11…
+## $ year            &lt;dbl&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, …
+## $ employment_type &lt;chr&gt; "Full Time", "Full Time", "Full Time", "Full Time", "F…
+## $ base_pay        &lt;dbl&gt; 105764.79, 47662.40, 101287.85, 118086.71, 90321.86, 6…
 ```
 
 **Goal**: 
@@ -189,18 +203,18 @@ lapd %&gt;%
 
 ```
 ## # A tibble: 68,564 × 4
-##     year employment_type base_pay base_pay_level            
-##    &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;                     
-##  1  2013 Full Time        105765. Greater than Median       
-##  2  2013 Full Time         47662. Less than Median, Greater…
-##  3  2013 Full Time        101288. Greater than Median       
-##  4  2013 Full Time        118087. Greater than Median       
-##  5  2013 Full Time         90322. Greater than Median       
-##  6  2013 Full Time         62770. Greater than Median       
-##  7  2013 Full Time         93718. Greater than Median       
-##  8  2013 Full Time             0  No Income                 
-##  9  2013 Full Time         51246. Less than Median, Greater…
-## 10  2013 Full Time         74227. Greater than Median       
+##     year employment_type base_pay base_pay_level                  
+##    &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;                           
+##  1  2013 Full Time        105765. Greater than Median             
+##  2  2013 Full Time         47662. Less than Median, Greater than 0
+##  3  2013 Full Time        101288. Greater than Median             
+##  4  2013 Full Time        118087. Greater than Median             
+##  5  2013 Full Time         90322. Greater than Median             
+##  6  2013 Full Time         62770. Greater than Median             
+##  7  2013 Full Time         93718. Greater than Median             
+##  8  2013 Full Time             0  No Income                       
+##  9  2013 Full Time         51246. Less than Median, Greater than 0
+## 10  2013 Full Time         74227. Greater than Median             
 ## # … with 68,554 more rows
 ```
 
@@ -230,9 +244,9 @@ glimpse(lapd)
 ```
 ## Rows: 68,564
 ## Columns: 3
-## $ year            &lt;dbl&gt; 2013, 2013, 2013, 2013, 2013, 2013…
-## $ employment_type &lt;chr&gt; "Full Time", "Full Time", "Full Ti…
-## $ base_pay        &lt;dbl&gt; 105764.79, 47662.40, 101287.85, 11…
+## $ year            &lt;dbl&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, …
+## $ employment_type &lt;chr&gt; "Full Time", "Full Time", "Full Time", "Full Time", "F…
+## $ base_pay        &lt;dbl&gt; 105764.79, 47662.40, 101287.85, 118086.71, 90321.86, 6…
 ```
 
 **Goal**: 

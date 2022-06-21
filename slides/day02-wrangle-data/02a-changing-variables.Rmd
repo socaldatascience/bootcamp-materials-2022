@@ -70,6 +70,20 @@ Which R functions have we learned together?
 
 ---
 
+class: middle
+
+What is the formula for variance?
+
+---
+
+class: middle
+
+You are given a data frame called `registrar`. There are two variables you are interested in `class_year` which represents whether someone is a first year, sophomore, junior, or senior and `gpa` which represents GPA. 
+
+How would you find the average GPA for each class rank?
+
+---
+
 
 class: center middle
 
