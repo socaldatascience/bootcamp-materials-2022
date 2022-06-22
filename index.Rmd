@@ -34,8 +34,11 @@ output:
 
 ## Day 2
 
-TBD
-
+| Topic                         | Materials |
+|-------------------------------|-----------|
+| Changing Variables       |[`r fontawesome::fa(name = "desktop")`](slides/day02-wrangle-data/02a-changing-variables.html)           |
+| Subsetting Data |[`r fontawesome::fa(name = "desktop")`](slides/day02-wrangle-data/02b-subsetting-data.html)                    |
+| Joining Data              |[`r fontawesome::fa(name = "desktop")`](slides/day02-wrangle-data/02c-joining-data.html)           |
 ## Day 3
 
 TBD
