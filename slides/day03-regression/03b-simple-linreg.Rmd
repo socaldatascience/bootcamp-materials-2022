@@ -1,5 +1,5 @@
 ---
-title: "Introduction"
+title: "Multiple Linear Regression"
 author: "Created by Dr. Mine Dogucu and Presented by Dr. Jessica Jaynes"
 output: 
   xaringan::moon_reader:
