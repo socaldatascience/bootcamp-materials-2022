@@ -42,7 +42,7 @@ output:
 
 ## Day 3
 
-| Topic                         | Materials |
+| Topic                         | Material |
 |-------------------------------|-----------|
 | Simple Linear Regression       |[`r fontawesome::fa(name = "desktop")`](slides/day03-regression/03a-simple-linreg.html)           |
 | Multiple Linear Regression |[`r fontawesome::fa(name = "desktop")`](slides/day03-regression/03b-simple-linreg.html)                   |
