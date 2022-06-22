@@ -3,7 +3,7 @@
   <head>
     <title>Introduction</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Dr. Mine Dogucu" />
+    <meta name="author" content="Created by Dr. Mine Dogucu and Presented by Dr. Jessica Jaynes" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -18,7 +18,7 @@ class: title-slide
 .right-panel[ 
 
 # Introduction
-## Dr. Mine Dogucu
+## Created by Dr. Mine Dogucu and Presented by Dr. Jessica Jaynes
 ]
 
 
@@ -349,7 +349,117 @@ The goal is to minimize
 
 `$$e_1^2 + e_2^2 + ... + e_n^2$$`
 
+--
 
+which can be rewritten as 
+
+`$$\sum_{i = 1}^n e_i^2$$`
+
+---
+
+## Conditions for Least Squares Regression
+
+- Linearity
+
+- Normality of Residuals 
+
+- Constant Variance
+
+- Independence
+
+
+---
+
+.pull-left[
+
+.center[**Linear**]
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+.center[**Non-linear**]
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+.pull-left[
+
+.center[**Nearly normal**]
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+.center[**Not normal**]
+
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+.pull-left[
+
+.center[**Constant Variance**]
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+.center[**Non-constant variance**]
+
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+class: middle
+
+## Independence
+
+Harder to check because we need to know how the data were collected.
+
+--
+
+In the description of the dataset it says _[a study]considered all pregnancies between 1960 and 1967 among women in the Kaiser Foundation Health Plan in the San Francisco East Bay area._
+
+--
+
+It is possible that babies born in the same hospital may have similar birth weight. 
+
+--
+
+Correlated data examples: patients within hospitals, students within schools, people within neighborhoods, time-series data. 
+
+---
+
+class: middle
+
+### Inference: Confidence Interval (theoretical)
+
+
+```r
+confint(model_g)
+```
+
+```
+##                   2.5 %    97.5 %
+## (Intercept) -26.3915884 6.2632199
+## gestation     0.4059083 0.5226169
+```
+
+Note that the 95% confidence interval for the slope does not contain zero and all the values in the interval are positive indicating a significant positive relationship between gestation and birth weight.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
