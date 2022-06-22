@@ -39,9 +39,14 @@ output:
 | Changing Variables       |[`r fontawesome::fa(name = "desktop")`](slides/day02-wrangle-data/02a-changing-variables.html)           |
 | Subsetting Data |[`r fontawesome::fa(name = "desktop")`](slides/day02-wrangle-data/02b-subsetting-data.html)                    |
 | Joining Data              |[`r fontawesome::fa(name = "desktop")`](slides/day02-wrangle-data/02c-joining-data.html)           |
+
 ## Day 3
 
-TBD
+| Topic                         | Materials |
+|-------------------------------|-----------|
+| Simple Linear Regression       |[`r fontawesome::fa(name = "desktop")`](slides/day03-regression/03a-simple-linreg.html)           |
+| Multiple Linear Regression |[`r fontawesome::fa(name = "desktop")`](slides/day03-regression/03b-simple-linreg.html)                   |
+
 
 ## Day 4
 
