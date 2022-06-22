@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-author: "Dr. Mine Dogucu"
+author: "Created by Dr. Mine Dogucu and Presented by Dr. Jessica Jaynes"
 output: 
   xaringan::moon_reader:
     css: ["slide-style.css"]
