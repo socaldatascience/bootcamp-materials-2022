@@ -48,6 +48,8 @@ output:
 | Multiple Linear Regression |[`r fontawesome::fa(name = "desktop")`](slides/day03-regression/03b-multiple-linreg.html)                   |
 
 
+
+
 ## Day 4
 
-TBD
+tbd
