@@ -143,6 +143,14 @@ ggplot(babies,
 ```
 
 ]
+
+---
+# Inference for Linear Regression
+When a scatterplot shows a linear relationship, we can use the least-squares line fitted to the data to predict y for a given value of x. If the data are a random sample from a larger population, we need statistical inference to answer questions like these:
+- Is there really a linear relationship between x and y in the population, or could the pattern we see in the scatterplot plausibly happen just by chance?
+- What is the slope (rate of change) that relates y to x in the population, including a margin of error for our estimate of the slope?
+
+
 ---
 
 ##  Baby Weights
@@ -263,6 +271,14 @@ model_g <- lm(bwt ~ gestation, data = babies)
 ```
 
 `lm` stands for linear model. We are fitting a linear regression model. Note that the variables are entered in y ~ x order.
+
+---
+class: middle
+```{r}
+summary(model_g)
+```
+
+
 
 ---
 
@@ -616,6 +632,16 @@ Correlated data examples: patients within hospitals, students within schools, pe
 
 ---
 
+## Conditions for Least Squares Regression
+```{r}
+plot(model_g, 1:2)
+```
+
+
+
+
+---
+
 class: middle
 
 ### Inference: Confidence Interval (theoretical)
@@ -625,3 +651,18 @@ confint(model_g)
 ```
 
 Note that the 95% confidence interval for the slope does not contain zero and all the values in the interval are positive indicating a significant positive relationship between gestation and birth weight.
+
+
+---
+# Coefficient of Determination: Connection between correlation and regression
+
+The square of the correlation, r2, is the fraction of the variation in values of y that is explained by the least-squares regression of y on x. 
+$r^2$ is called the coefficient of determination.
+
+
+---
+# Correlation Does Not Imply Causation
+- Even when direct causation is present, it may not be the whole explanation for a correlation.
+- Always worry about lurking variables and try to anticipate lurking variables and measure them
+- Do an experiment in which we change x and keep lurking variables under control.  
+
