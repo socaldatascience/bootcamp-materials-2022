@@ -191,11 +191,10 @@ babies %>%
 
 ---
 # Collinearity between explanatory variables
-- Two predictor variables are said to be collinear when they are  correlated, and this collinearity complicates model estimation.
-Remember: Predictors are also called explanatory or independent variables. Ideally,  they would be independent of each other.
-
-- We don’t like adding predictors that are associated with each  other to the model, because often times the addition of such  variable brings nothing to the table. Instead, we prefer the  simplest best model, i.e. parsimonious model.
-
+- Two predictor variables are collinear when they are correlated an d  collinearity complicates model estimation.
+- Predictors are also called explanatory or independent variables, and we want them to be independent of each other.
+- We do not wnat to add predictors that are associated with each  other to the model because adding these additional variables does not enhance the model. 
+- Instead, we prefer the  simplest best model, i.e. parsimonious model.
 - While it’s impossible to avoid collinearity from arising in observational data, experiments are usually designed to prevent correlation among predictors.
 
 ---
