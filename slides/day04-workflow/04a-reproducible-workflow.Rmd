@@ -655,3 +655,27 @@ class: middle
 Even a better approach for reproducible versions would be using [Docker](https://jsta.github.io/r-docker-tutorial/).
 
 
+---
+
+class: middle
+
+## Project Folder Example
+
+```
+data/
+|-- some_data.csv
+|-- some_other_data.csv
+|-- README.md
+weekly-reports/
+|-- YYYY-MM-DD-some-informative-title.Rmd
+|-- YYYY-MM-DD-some-informative-title.html
+|-- YYYY-MM-DD-another-informative-title.Rmd
+|-- YYYY-MM-DD-another-informative-title.html
+presentation/
+|-- presentation.Rmd
+|-- presentation.html
+README.md
+```
+
+
+
