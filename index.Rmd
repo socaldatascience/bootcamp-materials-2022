@@ -54,4 +54,4 @@ output:
 
 | Topic                         | Material |
 |-------------------------------|-----------|
-| Reproducible Workflow       |[`r fontawesome::fa(name = "desktop")`](slides/day04-work04a-reproducible-workflow.html)           |
+| Reproducible Workflow       |[`r fontawesome::fa(name = "desktop")`](slides/day04-workflow/04a-reproducible-workflow.html)           |
