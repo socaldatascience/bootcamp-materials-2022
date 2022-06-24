@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Introduction</title>
+    <title>Simple Linear Regression</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Dr. Mine Dogucu" />
+    <meta name="author" content="Created by Dr. Mine Dogucu and Presented by Dr. Jessica Jaynes" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
@@ -17,8 +17,8 @@ class: title-slide
 &lt;br&gt;
 .right-panel[ 
 
-# Introduction
-## Dr. Mine Dogucu
+# Simple Linear Regression
+## Created by Dr. Mine Dogucu and Presented by Dr. Jessica Jaynes
 ]
 
 
@@ -32,6 +32,60 @@ class: middle
 
 - Linear Regression with Numeric Predictors
 - Conditions for Linear Regression
+
+---
+class: middle
+
+# Association
+Two variables measured on the same cases are _associated_ if knowing the value of one of the variables tells you something that you would not otherwise know about the value of the other variable.
+ 
+---
+class: middle
+# Explanatory and Response Variables
+Is your purpose simply to explore the nature of the relationship, or do you hope to show that one of the variables can explain variation in the other? 
+
+__Response variable__: measures an outcome of a study (independent variable)
+__Explanatory variable__: explains or causes changes in the response variable (dependent variable)
+
+---
+class: middle
+# Scatterplot
+- Shows the relationship between two quantitative variables measured on the same individuals.
+- The values of one variable appear on the horizontal axis, and the values of the other variable appear on the vertical axis. 
+- Each individual corresponds to one point on the graph.
+
+You can describe the overall pattern of a scatterplot by the direction, form, and strength of the relationship. An important kind of departure is an outlier, an individual value that falls outside the overall pattern of the relationship.
+
+
+---
+class: middle
+# Measuring Linear Association
+A scatterplot displays the strength, direction, and form of the relationship between two quantitative variables. Linear relationships are important because a straight line is a simple pattern that is quite common.
+
+Our eyes are not always good judges of how strong a relationship is. Therefore, we use a numerical measure to supplement our scatterplot and help us interpret the strength of the linear relationship.
+
+The __correlation__ (r) measures the direction and strength of the linear relationship between two quantitative variables.
+
+---
+class: middle
+# Properties of Correlation
+
+- r is always a number between –1 and 1.
+- r &gt; 0 indicates a positive association.
+- r &lt; 0 indicates a negative association.
+- Values of r near 0 indicate a very weak linear relationship.
+- The strength of the linear relationship increases as r moves away from 0 toward –1 or 1.
+- The extreme values r = –1 and r = 1 occur only in the case of a perfect linear relationship. 
+- r has no units and does not change when we change the units of 	measurement of x, y, or both.
+- Correlation makes no distinction between explanatory and response variables.
+
+---
+class: middle
+# Cautions with Correlation :
+Correlation requires that both variables be quantitative.
+Correlation does not describe curved relationships between variables, no matter how strong the relationship is.
+The correlation r is not resistant; it can be strongly affected by a few outlying observations.
+Correlation is not a complete summary of two-variable data.
 
 ---
 
@@ -74,6 +128,14 @@ ggplot(babies,
 &lt;img src="03a-simple-linreg_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
+
+---
+# Inference for Linear Regression
+When a scatterplot shows a linear relationship, we can use the least-squares line fitted to the data to predict y for a given value of x. If the data are a random sample from a larger population, we need statistical inference to answer questions like these:
+- Is there really a linear relationship between x and y in the population, or could the pattern we see in the scatterplot plausibly happen just by chance?
+- What is the slope (rate of change) that relates y to x in the population, including a margin of error for our estimate of the slope?
+
+
 ---
 
 ##  Baby Weights
@@ -176,6 +238,37 @@ model_g &lt;- lm(bwt ~ gestation, data = babies)
 `lm` stands for linear model. We are fitting a linear regression model. Note that the variables are entered in y ~ x order.
 
 ---
+class: middle
+
+```r
+summary(model_g)
+```
+
+```
+## 
+## Call:
+## lm(formula = bwt ~ gestation, data = babies)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -49.394 -11.125   0.071  10.106  57.353 
+## 
+## Coefficients:
+##              Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept) -10.06418    8.32220  -1.209               0.227    
+## gestation     0.46426    0.02974  15.609 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 16.66 on 1221 degrees of freedom
+##   (13 observations deleted due to missingness)
+## Multiple R-squared:  0.1663,	Adjusted R-squared:  0.1657 
+## F-statistic: 243.6 on 1 and 1221 DF,  p-value: &lt; 0.00000000000000022
+```
+
+
+
+---
 
 class: middle
 
@@ -221,7 +314,7 @@ For a baby with 300 days of gestation the expected birth weight is 129.1 ounces.
 ## Interpretation of estimates
 
 .pull-left[
-&lt;img src="03a-simple-linreg_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03a-simple-linreg_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
 `\(b_1 = 0.464\)` which means for one unit(day) increase in gestation period the expected increase in birth weight is 0.464 ounces.
 
@@ -230,7 +323,7 @@ For a baby with 300 days of gestation the expected birth weight is 129.1 ounces.
 --
 
 .pull-right[
-&lt;img src="03a-simple-linreg_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03a-simple-linreg_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
 
 `\(b_0 = -10.1\)` which means for gestation period of 0 days the expected birth weight is -10.1 ounces!!!!!!!!
 (does NOT make sense)
@@ -276,7 +369,7 @@ babies %&gt;%
 
 .pull-right[
 
-![](03a-simple-linreg_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 
 
 ]
@@ -316,7 +409,7 @@ class: middle
 
 .pull-left[
 
-&lt;img src="03a-simple-linreg_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="03a-simple-linreg_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -349,6 +442,144 @@ The goal is to minimize
 
 `$$e_1^2 + e_2^2 + ... + e_n^2$$`
 
+--
+
+which can be rewritten as 
+
+`$$\sum_{i = 1}^n e_i^2$$`
+
+---
+
+## Conditions for Least Squares Regression
+
+- Linearity
+
+- Normality of Residuals 
+
+- Constant Variance
+
+- Independence
+
+
+---
+
+.pull-left[
+
+.center[**Linear**]
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+.center[**Non-linear**]
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+.pull-left[
+
+.center[**Nearly normal**]
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+.center[**Not normal**]
+
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+.pull-left[
+
+.center[**Constant Variance**]
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+.center[**Non-constant variance**]
+
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+class: middle
+
+## Independence
+
+Harder to check because we need to know how the data were collected.
+
+--
+
+In the description of the dataset it says _[a study]considered all pregnancies between 1960 and 1967 among women in the Kaiser Foundation Health Plan in the San Francisco East Bay area._
+
+--
+
+It is possible that babies born in the same hospital may have similar birth weight. 
+
+--
+
+Correlated data examples: patients within hospitals, students within schools, people within neighborhoods, time-series data. 
+
+---
+
+## Conditions for Least Squares Regression
+
+```r
+plot(model_g, 1:2)
+```
+
+![](03a-simple-linreg_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;![](03a-simple-linreg_files/figure-html/unnamed-chunk-23-2.png)&lt;!-- --&gt;
+
+
+
+
+---
+
+class: middle
+
+### Inference: Confidence Interval (theoretical)
+
+
+```r
+confint(model_g)
+```
+
+```
+##                   2.5 %    97.5 %
+## (Intercept) -26.3915884 6.2632199
+## gestation     0.4059083 0.5226169
+```
+
+Note that the 95% confidence interval for the slope does not contain zero and all the values in the interval are positive indicating a significant positive relationship between gestation and birth weight.
+
+
+---
+# Coefficient of Determination: Connection between correlation and regression
+
+The square of the correlation, `\(R^2\)`, is the fraction of the variation in values of y that is explained by the least-squares regression of y on x. 
+`\(R^2\)` is called the coefficient of determination.
+
+
+---
+# Correlation Does Not Imply Causation
+- Even when direct causation is present, it may not be the whole explanation for a correlation.
+- Always worry about lurking variables and try to anticipate lurking variables and measure them
+- Do an experiment in which we change x and keep lurking variables under control.  
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
@@ -398,6 +629,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

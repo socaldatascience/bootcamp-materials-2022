@@ -1,6 +1,6 @@
 ---
-title: "Introduction"
-author: "Dr. Mine Dogucu"
+title: "Simple Linear Regression"
+author: "Created by Dr. Mine Dogucu and Presented by Dr. Jessica Jaynes"
 output: 
   xaringan::moon_reader:
     css: ["slide-style.css"]
@@ -40,6 +40,60 @@ class: middle
 
 - Linear Regression with Numeric Predictors
 - Conditions for Linear Regression
+
+---
+class: middle
+
+# Association
+Two variables measured on the same cases are _associated_ if knowing the value of one of the variables tells you something that you would not otherwise know about the value of the other variable.
+ 
+---
+class: middle
+# Explanatory and Response Variables
+Is your purpose simply to explore the nature of the relationship, or do you hope to show that one of the variables can explain variation in the other? 
+
+__Response variable__: measures an outcome of a study (independent variable)
+__Explanatory variable__: explains or causes changes in the response variable (dependent variable)
+
+---
+class: middle
+# Scatterplot
+- Shows the relationship between two quantitative variables measured on the same individuals.
+- The values of one variable appear on the horizontal axis, and the values of the other variable appear on the vertical axis. 
+- Each individual corresponds to one point on the graph.
+
+You can describe the overall pattern of a scatterplot by the direction, form, and strength of the relationship. An important kind of departure is an outlier, an individual value that falls outside the overall pattern of the relationship.
+
+
+---
+class: middle
+# Measuring Linear Association
+A scatterplot displays the strength, direction, and form of the relationship between two quantitative variables. Linear relationships are important because a straight line is a simple pattern that is quite common.
+
+Our eyes are not always good judges of how strong a relationship is. Therefore, we use a numerical measure to supplement our scatterplot and help us interpret the strength of the linear relationship.
+
+The __correlation__ (r) measures the direction and strength of the linear relationship between two quantitative variables.
+
+---
+class: middle
+# Properties of Correlation
+
+- r is always a number between –1 and 1.
+- r > 0 indicates a positive association.
+- r < 0 indicates a negative association.
+- Values of r near 0 indicate a very weak linear relationship.
+- The strength of the linear relationship increases as r moves away from 0 toward –1 or 1.
+- The extreme values r = –1 and r = 1 occur only in the case of a perfect linear relationship. 
+- r has no units and does not change when we change the units of 	measurement of x, y, or both.
+- Correlation makes no distinction between explanatory and response variables.
+
+---
+class: middle
+# Cautions with Correlation :
+Correlation requires that both variables be quantitative.
+Correlation does not describe curved relationships between variables, no matter how strong the relationship is.
+The correlation r is not resistant; it can be strongly affected by a few outlying observations.
+Correlation is not a complete summary of two-variable data.
 
 ---
 
@@ -89,6 +143,14 @@ ggplot(babies,
 ```
 
 ]
+
+---
+# Inference for Linear Regression
+When a scatterplot shows a linear relationship, we can use the least-squares line fitted to the data to predict y for a given value of x. If the data are a random sample from a larger population, we need statistical inference to answer questions like these:
+- Is there really a linear relationship between x and y in the population, or could the pattern we see in the scatterplot plausibly happen just by chance?
+- What is the slope (rate of change) that relates y to x in the population, including a margin of error for our estimate of the slope?
+
+
 ---
 
 ##  Baby Weights
@@ -209,6 +271,14 @@ model_g <- lm(bwt ~ gestation, data = babies)
 ```
 
 `lm` stands for linear model. We are fitting a linear regression model. Note that the variables are entered in y ~ x order.
+
+---
+class: middle
+```{r}
+summary(model_g)
+```
+
+
 
 ---
 
@@ -404,4 +474,195 @@ The goal is to minimize
 
 $$e_1^2 + e_2^2 + ... + e_n^2$$
 
+--
+
+which can be rewritten as 
+
+$$\sum_{i = 1}^n e_i^2$$
+
+---
+
+## Conditions for Least Squares Regression
+
+- Linearity
+
+- Normality of Residuals 
+
+- Constant Variance
+
+- Independence
+
+
+---
+
+.pull-left[
+
+.center[**Linear**]
+```{r  echo = FALSE, message = FALSE}
+set.seed(84735)
+x <- seq(-2, 2, by = 0.01)
+y <- 4*x + 5 + rnorm(length(x), 0 , 1.5)
+
+data_good <- data.frame(x = x, y = y) %>%   sample_n(50)
+
+data_good %>% 
+  ggplot() +
+  aes(x = x, y = y) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+]
+
+.pull-right[
+
+.center[**Non-linear**]
+```{r  echo = FALSE, message = FALSE}
+set.seed(84735)
+x <- seq(-2, 2, by = 0.01)
+y <- 3*x^2 + x + 5 + rnorm(length(x), 0 , 2)
+
+data_bad<- data.frame(x = x, y = y) %>% sample_n(50)
+
+data_bad %>% 
+  ggplot() +
+  aes(x = x, y = y) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  stat_function(fun = function(x)3*x^2 + x + 5 )
+```
+
+]
+
+---
+
+.pull-left[
+
+.center[**Nearly normal**]
+
+```{r echo = FALSE, message = FALSE}
+model_good <- lm(y ~ x, data = data_good)
+
+data_good <- 
+  data_good %>%
+  sample_n(50) %>% 
+  modelr::add_residuals(model_good) 
+
+data_good %>% 
+  ggplot(aes(x = resid)) +
+  geom_density()
+
+```
+
+]
+
+.pull-right[
+
+.center[**Not normal**]
+
+
+```{r echo = FALSE, message = FALSE}
+model_bad <- lm(y ~ x, data = data_bad)
+
+data_bad <- 
+  data_bad %>% 
+  modelr::add_residuals(model_bad) 
+
+data_bad %>% 
+  ggplot(aes(x = resid)) +
+  geom_density()
+
+```
+
+]
+
+---
+
+.pull-left[
+
+.center[**Constant Variance**]
+
+```{r echo = FALSE, message = FALSE}
+
+data_good %>% 
+  ggplot(aes(x = x, y = resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0)
+
+```
+
+]
+
+.pull-right[
+
+.center[**Non-constant variance**]
+
+
+```{r echo = FALSE, message = FALSE}
+
+
+data_bad %>% 
+  ggplot(aes(x = x, y = resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0)
+
+```
+
+]
+
+---
+
+class: middle
+
+## Independence
+
+Harder to check because we need to know how the data were collected.
+
+--
+
+In the description of the dataset it says _[a study]considered all pregnancies between 1960 and 1967 among women in the Kaiser Foundation Health Plan in the San Francisco East Bay area._
+
+--
+
+It is possible that babies born in the same hospital may have similar birth weight. 
+
+--
+
+Correlated data examples: patients within hospitals, students within schools, people within neighborhoods, time-series data. 
+
+---
+
+## Conditions for Least Squares Regression
+```{r}
+plot(model_g, 1:2)
+```
+
+
+
+
+---
+
+class: middle
+
+### Inference: Confidence Interval (theoretical)
+
+```{r}
+confint(model_g)
+```
+
+Note that the 95% confidence interval for the slope does not contain zero and all the values in the interval are positive indicating a significant positive relationship between gestation and birth weight.
+
+
+---
+# Coefficient of Determination: Connection between correlation and regression
+
+The square of the correlation, $R^2$, is the fraction of the variation in values of y that is explained by the least-squares regression of y on x. 
+$R^2$ is called the coefficient of determination.
+
+
+---
+# Correlation Does Not Imply Causation
+- Even when direct causation is present, it may not be the whole explanation for a correlation.
+- Always worry about lurking variables and try to anticipate lurking variables and measure them
+- Do an experiment in which we change x and keep lurking variables under control.  
 

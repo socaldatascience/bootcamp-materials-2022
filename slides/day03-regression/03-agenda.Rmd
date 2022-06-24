@@ -1,0 +1,46 @@
+---
+title: "SoCal Data Science Bootcamp Day3 Agenda"
+author: "Jessica Jaynes"
+date: "6/22/2022"
+output: 
+  xaringan::moon_reader:
+    css: ["slide-style.css"]
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+
+
+---
+class: title-slide
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(gridExtra)
+options(scipen = 999)
+```
+
+---
+class: middle
+1. Name game - anyone want to repeat the names?
+
+2. Homework/activity from Bootcamp Day 2
+
+3. YouTube Trending Data Activity: Review Days 1 and 2 from Bootcamp
+
+4. Linear regression notes
+
+5. MLB Activity: Linear Regression
+
+6. Dr. Hadley Wickham seminar 
