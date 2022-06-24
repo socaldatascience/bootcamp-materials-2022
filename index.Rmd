@@ -52,4 +52,6 @@ output:
 
 ## Day 4
 
-tbd
+| Topic                         | Material |
+|-------------------------------|-----------|
+| Reproducible Workflow       |[`r fontawesome::fa(name = "desktop")`](slides/day04-work04a-reproducible-workflow.html)           |
