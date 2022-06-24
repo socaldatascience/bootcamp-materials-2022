@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Workflow practices for reproducible analysis</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="04a-reproducible-workflow_files/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Workflow practices for reproducible analysis
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle center
+
+.font50[Project Teams Are <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M431.34 122.05l73.53-47.42a16 16 0 0 0 4.44-22.19l-8.87-13.31a16 16 0 0 0-22.19-4.44l-110.06 71C318.43 96.91 271.22 96 256 96 219.55 96 0 100.55 0 208.15v160.23c0 30.27 27.5 57.68 72 77.86v-101.9a24 24 0 1 1 48 0v118.93c33.05 9.11 71.07 15.06 112 16.73V376.39a24 24 0 1 1 48 0V480c40.93-1.67 78.95-7.62 112-16.73V344.34a24 24 0 1 1 48 0v101.9c44.5-20.18 72-47.59 72-77.86V208.15c0-43.32-35.76-69.76-80.66-86.1zM256 272.24c-114.88 0-208-28.69-208-64.09s93.12-64.08 208-64.08c17.15 0 33.73.71 49.68 1.91l-72.81 47a16 16 0 0 0-4.43 22.19l8.87 13.31a16 16 0 0 0 22.19 4.44l118.64-76.52C430.09 168 464 186.84 464 208.15c0 35.4-93.13 64.09-208 64.09z"/></svg>]
+
+---
+
+class: middle
+
+## Review
+
+Questions 
+
+TidyTuesday Activity Examples
+
+---
+
+class: middle center
+
+
+.font50[R packages]
+
+
+---
+
+
+
+class: middle center
+
+.pull-left[
+
+__Default__
+
+&lt;img src="img/office-suite-default.png" width="60%" /&gt;
+
+]
+
+.footnote[Microsoft products have Copyright. Images used based on [fair use](https://www.microsoft.com/en-us/legal/copyright/default.aspx) for educational purposes.]
+
+.pull-right[
+
+__Optional__
+
+&lt;img src="img/office-suite-optional.png" width="60%" /&gt;
+
+
+]
+
+---
+class: middle
+
+## R packages
+
+
+When you download R, you actually download base R. 
+
+--
+
+But there are MANY optional packages you can download.
+
+
+---
+
+class: middle
+
+
+## R packages
+
+There are more than 15000 R packages. 
+
+--
+
+Good part: There is an R package for (almost) everything, from complex statistical modeling packages to baby names.
+
+--
+
+Bad part: At the beginning it can feel overwhelming. 
+
+---
+
+class: middle 
+
+## R packages
+
+All this time we have actually been using R packages. 
+
+---
+
+class: middle 
+
+## R packages
+
+What do R packages have? All sorts of things but mainly
+
+- functions 
+
+- datasets
+
+---
+
+class: middle
+
+## R packages
+
+Try running the following code:
+
+
+```r
+beep()
+```
+
+```
+## Error in beep(): could not find function "beep"
+```
+
+Why are we seeing this error? 
+
+---
+
+class:inverse middle
+
+.font75[Installing packages]
+
+---
+
+## Using `install.packages()`
+
+In your **Console**, install the beepr package
+
+
+```r
+install.packages("beepr")
+```
+
+We do this in the Console because we only need to do it once.
+
+---
+
+## Using Packages pane
+
+&lt;img src="img/packages-pane.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+Packages Pane &gt; Install 
+
+---
+
+## Letting RStudio Install
+
+&lt;img src="img/rstudio-install.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+If you save your file and using a package RStudio will tell you that you have not installed the package.
+
+---
+
+class:inverse middle
+
+.font75[Using packages]
+
+---
+
+## Using beep() from beepr
+
+.pull-left[
+Option 1
+
+```r
+library(beepr)
+beep()
+```
+
+More common usage. 
+Useful if you are going to use multiple functions from the same package.
+E.g. we have used many functions (ggplot, aes, geom_...) from the ggplot2 package. In such cases, usual practice is to put the library name in the first R chunk in the .Rmd file.
+
+]
+
+.pull-right[
+Option 2
+
+```r
+beepr::beep()
+```
+Useful when you are going to use a function once or few times. Also useful if there are any conflicts. For instance if there is some other package in your environment that has a beep() function that prints the word beep, you would want to distinguish the beep function from the beepr package and the beep function from the other imaginary package. 
+]
+
+---
+
+&lt;img src="img/beep-help.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: middle
+
+## Open Source
+
+Any one around the world can create R packages. [You can too](https://r-pkgs.org/).
+
+--
+
+Good part: We are able to do pretty much anything R because someone from around the world has developed the package and shared it. 
+
+--
+
+Bad part: The language can be inconsistent. 
+
+--
+
+Good news: We have tidyverse. 
+
+
+---
+
+## Tidyverse
+
+
+&gt;The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. 
+                  tidyverse.org
+---
+
+## Tidyverse
+
+In short, tidyverse is a family of packages. From practical stand point, you can install many tidyverse packages at once (and you did this). By doing that you installed all the following packages.
+
+- ggplot2
+- dplyr
+- tidyr
+- readr
+- purrr
+- tibble
+- stringr
+- forcats
+
+---
+
+class: middle 
+
+We can also load the tidyverse packages all at the same time.
+
+
+```r
+library(tidyverse)
+```
+
+---
+
+## Fun fact
+
+.left-panel[
+
+```r
+library(magrittr)
+```
+
+&lt;img src="img/pipe-logo.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+
+.right-panel[
+[Treachery of Images](https://en.wikipedia.org/wiki/The_Treachery_of_Images#/media/File:MagrittePipe.jpg) by René Magritte
+
+&lt;img src="img/magritte.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[Image for Treachery of Images is from University of Alabama [website](https://tcf.ua.edu/Classes/Jbutler/T311/Modernism.htm) and used under fair use for educational purposes.]
+]
+
+
+---
+
+**Note:** The packages get loaded (e.g. `library(tidyverse)`) at the top of .R and .Rmd files. 
+
+
+---
+
+
+class: center middle inverse
+
+.font50[Naming files]
+
+---
+
+class: middle
+
+Three principles of naming files 
+
+- machine readable
+- human readable
+- plays well with default ordering (e.g. alphabetical and numerical ordering)
+
+(Jenny Bryan)
+
+for the purposes of this class an additional principle is that file names follow
+
+- tidyverse style (all lower case letters, words separated by HYPHEN)
+
+---
+
+class: center middle inverse
+
+.font50[README.md]
+
+---
+
+class: middle
+
+- README file is the first file users read. In our case a user might be our future self, a teammate, or (if open source) anyone.
+
+--
+
+- There can be multiple README files within a single directory: e.g. for the general project folder and then for a data subfolder. Data folder README's can possibly contain codebook (data dictionary).
+
+--
+
+- It should be brief but detailed enough to help user navigate. 
+
+--
+
+- a README should be up-to-date (e.g. froom weekly research updates to final research project repo).
+
+--
+
+- On GitHub we use markdown for README file (`README.md`). Good news: [emojis are supported.](https://gist.github.com/rxaviers/7360908)
+
+---
+
+class: middle
+
+## README examples
+
+- [Stats 295 website](https://github.com/stats295r-fa21/website)
+- [Museum of Modern Art Collection](https://github.com/MuseumofModernArt/collection)
+- [R package bayesrules](https://github.com/bayes-rules/bayesrules)
+
+---
+
+## .gitignore
+
+A `.gitignore` file contains the list of files which Git has been explicitly told to ignore. 
+
+--
+
+For instance `README.html` can be git ignored.
+
+--
+
+You may consider git ignoring confidential files (e.g. some datasets) so that they would not be pushed by mistake to GitHub. 
+
+--
+
+A file can be git ignored either by point-and-click using RStudio's Git pane or by adding the file path to the `.gitignore` file. For instance `weather.csv` data file in a `data` folder need to be added as `data/weather.csv`
+
+--
+
+Files with certain files (e.g. all `.log` files) can also be ignored. See [git ignore patterns](https://www.atlassian.com/git/tutorials/saving-changes/gitignore).
+
+---
+class: center middle inverse
+
+.font50[Importing data]
+
+---
+
+class: middle
+
+## Importing .csv Data 
+
+
+
+```r
+readr::read_csv("dataset.csv")
+```
+
+---
+
+class: middle
+
+## Importing Excel Data
+
+
+```r
+readxl::read_excel("dataset.xlsx")
+```
+
+ 
+
+---
+
+class: middle
+
+
+## Importing Excel Data
+
+
+```r
+readxl::read_excel("dataset.xlsx", sheet = 2)
+```
+
+---
+
+class: middle
+
+## Importing SAS, SPSS, Stata Data
+
+
+```r
+library(haven)
+# SAS
+read_sas("dataset.sas7bdat")
+# SPSS
+read_sav("dataset.sav")
+# Stata
+read_dta("dataset.dta")
+```
+
+
+---
+
+class: middle
+
+## Where is the dataset file?
+
+Importing data will depend on where the dataset is on your computer. However we use the help of `here::here()` function. 
+This function sets the working directory to the project folder (i.e. where the `.Rproj` file is).
+
+
+```r
+read_csv(here::here("data/dataset.csv"))
+```
+
+
+---
+
+class: center middle inverse
+
+.font50[Collaborating on GitHub]
+
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.002.jpeg" width="90%" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.003.jpeg" width="90%" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.004.jpeg" width="90%" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.005.jpeg" width="90%" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.006.jpeg" width="90%" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.007.jpeg" width="90%" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.008.jpeg" width="90%" /&gt;
+
+---
+
+class: middle
+
+If each change is made by one collaborator at a time, this would not be an efficient workflow. 
+
+
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.009.jpeg" width="90%" /&gt;
+
+---
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.010.jpeg" width="90%" /&gt;
+
+---
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.011.jpeg" width="90%" /&gt;
+
+---
+
+
+class: middle 
+
+
+1 - commit
+
+2 - pull (very important)
+
+3 - push
+
+
+---
+
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.013.jpeg" width="90%" /&gt;
+
+
+---
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.014.jpeg" width="90%" /&gt;
+
+
+---
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.015.jpeg" width="90%" /&gt;
+
+
+---
+
+## Opening an issue
+
+&lt;img src="img/create-issue.png" width="80%" /&gt;
+
+We can create an **issue** to keep a list of mistakes to be fixed, ideas to check with teammates, or note a to-do task. You can assign tasks to yourself or teammates. 
+
+---
+
+## Closing an issue
+
+&lt;img src="img/issue-number.png" width="80%" /&gt;
+
+If you are working on an issue, it makes sense to refer to issue number in your commit message (e.g. "add first draft of alternate texts for #4"). 
+If your commit resolves the issue then you can use key words such as "fixes #4" or "closes #4" to close the issue. 
+Issues can also be manually closed.
+
+---
+
+It is also a good practice to save session information as package versions change, in order to be able to reproduce results from an analysis we need to know under what technical conditions the analysis was conducted.
+
+
+```r
+sessionInfo()
+```
+
+```
+## R version 4.2.0 (2022-04-22)
+## Platform: x86_64-apple-darwin17.0 (64-bit)
+## Running under: macOS Big Sur/Monterey 10.16
+## 
+## Matrix products: default
+## BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] magrittr_2.0.3  forcats_0.5.1   stringr_1.4.0   dplyr_1.0.9    
+##  [5] purrr_0.3.4     readr_2.1.2     tidyr_1.2.0     tibble_3.1.7   
+##  [9] ggplot2_3.3.6   tidyverse_1.3.1
+## 
+## loaded via a namespace (and not attached):
+##  [1] tidyselect_1.1.2  xfun_0.31         bslib_0.3.1       haven_2.5.0      
+##  [5] colorspace_2.0-3  vctrs_0.4.1       generics_0.1.2    htmltools_0.5.2  
+##  [9] yaml_2.3.5        utf8_1.2.2        rlang_1.0.2       jquerylib_0.1.4  
+## [13] pillar_1.7.0      withr_2.5.0       glue_1.6.2        DBI_1.1.2        
+## [17] dbplyr_2.1.1      modelr_0.1.8      readxl_1.4.0      lifecycle_1.0.1  
+## [21] cellranger_1.1.0  munsell_0.5.0     gtable_0.3.0      fontawesome_0.2.2
+## [25] rvest_1.0.2       evaluate_0.15     knitr_1.39        tzdb_0.3.0       
+## [29] fastmap_1.1.0     fansi_1.0.3       highr_0.9         broom_0.8.0      
+## [33] backports_1.4.1   scales_1.2.0      jsonlite_1.8.0    fs_1.5.2         
+## [37] hms_1.1.1         digest_0.6.29     stringi_1.7.6     xaringan_0.24    
+## [41] grid_4.2.0        cli_3.3.0         tools_4.2.0       sass_0.4.1       
+## [45] crayon_1.5.1      pkgconfig_2.0.3   ellipsis_0.3.2    xml2_1.3.3       
+## [49] reprex_2.0.1      lubridate_1.8.0   assertthat_0.2.1  rmarkdown_2.14   
+## [53] httr_1.4.3        rstudioapi_0.13   R6_2.5.1          compiler_4.2.0
+```
+
+---
+
+class: middle
+
+A better way to keep track of package versions, system settings during compiling a project is by using `renv::snapshot()`. This function will create a `renv.lock` and will take a snapshot of packages to be stored in this file. 
+
+---
+
+class: middle
+
+Even a better approach for reproducible versions would be using [Docker](https://jsta.github.io/r-docker-tutorial/).
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
