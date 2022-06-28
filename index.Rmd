@@ -49,7 +49,6 @@ output:
 
 
 
-
 ## Day 4
 
 | Topic                         | Material |
